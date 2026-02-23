@@ -1,31 +1,53 @@
 # src/ai_engine/predictor.py
 import pandas as pd
+import joblib
+import os
 
 class PricePredictor:
-    def __init__(self, model=None, model_columns=None):
-        self.model = model
-        self.model_columns = model_columns
-            
-    # CẬP NHẬT: Thêm tham số đầu vào
+    def __init__(self, model_path):
+        """Khởi tạo AI Engine và nạp Model"""
+        self.model_data = self._load_model(model_path)
+        if self.model_data:
+            self.model = self.model_data['model']
+            self.features = self.model_data['features']
+            self.mae = self.model_data.get('mae', 0)
+        else:
+            self.model = None
+
+    def _load_model(self, path):
+        if os.path.exists(path):
+            return joblib.load(path)
+        return None
+
+    def is_ready(self):
+        return self.model is not None
+
     def predict_single(self, area, bedrooms, bathrooms, ward, property_type):
-        if self.model is None or self.model_columns is None:
-            raise ValueError("Model hoặc Danh sách cột chưa được khởi tạo!")
-    
-        # 1. Tạo input dataframe với ĐẦY ĐỦ các cột mới
-        input_data = pd.DataFrame({
-            'area': [float(area)], 
-            'bedrooms': [float(bedrooms)],
-            'bathrooms': [float(bathrooms)],
-            'ward': [ward],
-            'property_type': [property_type]
-        })
+        """
+        Nhận tham số thô từ UI, xử lý Feature Alignment và trả về giá dự đoán.
+        """
+        if not self.is_ready():
+            raise ValueError("Model chưa sẵn sàng!")
+
+        # 1. Tạo DataFrame đầu vào rỗng với cấu trúc cột chuẩn từ lúc Train
+        input_df = pd.DataFrame(0, index=[0], columns=self.features)
         
-        # 2. One-hot encoding cho cả ward và property_type
-        input_encoded = pd.get_dummies(input_data, columns=['ward', 'property_type'])
+        # 2. Điền các biến số lượng
+        input_df['area'] = area
+        input_df['bedrooms'] = bedrooms
+        input_df['bathrooms'] = bathrooms
         
-        # 3. Đồng bộ cột với mô hình đã huấn luyện
-        input_encoded = input_encoded.reindex(columns=self.model_columns, fill_value=0)
+        # 3. Kỹ thuật Feature Alignment cho biến phân loại
+        ward_col = f'ward_{ward}'
+        type_col = f'property_type_{property_type}'
         
-        # 4. Predict
-        price_billion = self.model.predict(input_encoded)[0]
-        return price_billion
+        if ward_col in input_df.columns:
+            input_df[ward_col] = 1
+        if type_col in input_df.columns:
+            input_df[type_col] = 1
+
+        # 4. Thực hiện dự đoán
+        pred_price = self.model.predict(input_df)[0]
+        
+        # Trả về cả giá dự đoán và sai số MAE của mô hình
+        return pred_price, self.mae

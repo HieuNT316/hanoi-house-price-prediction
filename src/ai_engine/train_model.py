@@ -1,112 +1,115 @@
-import sys
+# src/ai_engine/train_model.py
 import pandas as pd
-import sqlite3
-import joblib
-import os
 import numpy as np
+import os
+import sys
+import joblib
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from src import config
+from src.database.postgres_manager import PostgresManager
 
-def load_data(db_path):
-    conn = sqlite3.connect(db_path)
-    # Lấy toàn bộ dữ liệu (cả cũ và mới vừa cào thêm)
-    df = pd.read_sql("SELECT * FROM listings", conn)
-    conn.close()
+# Đường dẫn lưu Model Champion
+MODEL_PATH = config.MODEL_PATH
+
+def load_data_from_db():
+    print("🔄 Đang lấy dữ liệu từ PostgreSQL...")
+    db = PostgresManager()
+    # Chỉ lấy các cột cần thiết cho việc training
+    query = """
+        SELECT price_billion, area, ward, property_type, bedrooms, bathrooms 
+        FROM listings 
+        WHERE price_billion IS NOT NULL AND area IS NOT NULL
+    """
+    df = db.load_dataframe(query)
+    print(f"✅ Đã tải {len(df)} bản ghi để huấn luyện.")
     return df
 
-def preprocess_data(df):
-    # 1. Tách phường và lọc bỏ giá trị trống
-    # Thêm các cột mới vào subset để đảm bảo dữ liệu đầy đủ
-    df = df.dropna(subset=['price_billion', 'area', 'ward', 'property_type', 'bedrooms', 'bathrooms'])
-    
-    # 2. ÉP KIỂU SỐ TƯỜNG MINH
-    df['area'] = pd.to_numeric(df['area'], errors='coerce')
-    df['bedrooms'] = pd.to_numeric(df['bedrooms'], errors='coerce')
-    df['bathrooms'] = pd.to_numeric(df['bathrooms'], errors='coerce')
-    df = df.dropna(subset=['area', 'bedrooms', 'bathrooms']) 
-    
-    # 3. Lấy TẤT CẢ các cột features có giá trị
-    X = df[['area', 'bedrooms', 'bathrooms', 'ward', 'property_type']].copy()
+def preprocess_features(df):
+    """Xử lý One-Hot Encoding cho các biến phân loại"""
+    # Tách X, y
     y = df['price_billion']
+    X = df.drop(columns=['price_billion'])
     
-    # 4. Dummy encoding (Mã hóa One-Hot cho cả Phường và Loại hình BĐS)
-    X = pd.get_dummies(X, columns=['ward', 'property_type'])
-    
-    return X, y
+    # One-hot encoding cho Phường/Xã và Loại hình BĐS
+    X_encoded = pd.get_dummies(X, columns=['ward', 'property_type'], drop_first=True)
+    return X_encoded, y
 
-def train_and_evaluate():
-    # --- 1. SETUP ĐƯỜNG DẪN ---
-    db_path = config.DB_PATH
-    model_path = config.MODEL_PATH
-
-    print("⏳ Đang tải dữ liệu từ Database...")
-    df = load_data(db_path)
-    print(f"📊 Tổng số mẫu dữ liệu hiện có: {len(df)}")
-
-    # --- 2. XỬ LÝ DỮ LIỆU ---
-    X, y = preprocess_data(df)
-    
-    # Chia tập train/test (80% học, 20% thi)
+def train_and_evaluate(X, y):
+    print("🧠 Đang chia tập dữ liệu và thiết lập Cross-Validation...")
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # --- 3. HUẤN LUYỆN MODEL MỚI (CHALLENGER) ---
-    print("🚀 Đang huấn luyện model mới trên toàn bộ dữ liệu...")
-    new_model = RandomForestRegressor(n_estimators=200, random_state=42) # Tăng lên 200 cây để học kỹ hơn
-    new_model.fit(X_train, y_train)
+    # Khởi tạo mô hình
+    rf = RandomForestRegressor(random_state=42)
 
-    # Đánh giá model mới
-    y_pred_new = new_model.predict(X_test)
-    mae_new = mean_absolute_error(y_test, y_pred_new)
-    print(f"🎯 Sai số trung bình (MAE) của Model MỚI: {mae_new:.2f} Tỷ")
+    # Thiết lập Hyperparameter Tuning Grid
+    param_grid = {
+        'n_estimators': [100, 200],          # Số lượng cây quyết định
+        'max_depth': [None, 10, 20],         # Độ sâu tối đa của cây
+        'min_samples_split': [2, 5]          # Số mẫu tối thiểu để chia nhánh
+    }
 
-    # --- 4. SO SÁNH VỚI MODEL CŨ (CHAMPION) ---
-    save_new_model = True
+    # Áp dụng K-Fold Cross Validation (cv=3)
+    grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, 
+                               cv=3, scoring='neg_mean_absolute_error', n_jobs=-1, verbose=1)
     
-    if os.path.exists(model_path):
-        print("⚔️ Đang so sánh với Model cũ...")
-        try:
-            old_artifact = joblib.load(model_path)
-            old_model = old_artifact['model']
-            old_columns = old_artifact['model_columns']
-            
-            # Để so sánh công bằng, phải dùng X_test hiện tại để test model cũ
-            # Nhưng model cũ có thể khác cột (do phường mới/cũ), cần đồng bộ cột
-            X_test_aligned = X_test.reindex(columns=old_columns, fill_value=0)
-            
-            y_pred_old = old_model.predict(X_test_aligned)
-            mae_old = mean_absolute_error(y_test, y_pred_old)
-            
-            print(f"👴 Sai số trung bình (MAE) của Model CŨ: {mae_old:.2f} Tỷ")
-            
-            # Logic quyết định
-            if mae_new < mae_old:
-                print(f"✅ Model MỚI tốt hơn ({mae_new:.2f} < {mae_old:.2f}). Sẽ cập nhật!")
-            elif abs(mae_new - mae_old) < 0.1:
-                print("⚠️ Hiệu suất tương đương. Cập nhật để học thêm dữ liệu mới.")
-            else:
-                print(f"❌ Model MỚI tệ hơn ({mae_new:.2f} > {mae_old:.2f}).")
-                # Trong thực tế có thể không save, nhưng vì ta cần nó học dữ liệu mới
-                # nên ở đây ta vẫn ưu tiên save, trừ khi sai số quá lớn.
-                print("-> Vẫn sẽ cập nhật để model bao phủ được các khu vực mới.")
-                
-        except Exception as e:
-            print(f"⚠️ Không load được model cũ để so sánh ({e}). Sẽ ghi đè model mới.")
-    else:
-        print("✨ Chưa có model cũ. Đây là lần train đầu tiên.")
+    print("⏳ Đang huấn luyện (Tìm kiếm siêu tham số tối ưu)...")
+    grid_search.fit(X_train, y_train)
+    
+    # Lấy ra mô hình (Challenger) tốt nhất từ lưới tìm kiếm
+    challenger_model = grid_search.best_estimator_
+    print(f"✅ Tham số tối ưu: {grid_search.best_params_}")
 
-    # --- 5. LƯU MODEL (NẾU QUYẾT ĐỊNH LƯU) ---
-    if save_new_model:
-        artifact = {
-            'model': new_model,
-            'model_columns': X.columns.tolist()
-        }
-        joblib.dump(artifact, model_path)
-        print(f"💾 Đã lưu model thành công tại: {model_path}")
-        print("👉 Hãy chạy lại 'streamlit run app.py' để áp dụng thay đổi.")
+    # Đánh giá MAE trên tập Test
+    y_pred = challenger_model.predict(X_test)
+    challenger_mae = mean_absolute_error(y_test, y_pred)
+    
+    print(f"📊 MAE của Challenger Model: {challenger_mae:.4f} Tỷ VNĐ")
+    
+    return challenger_model, challenger_mae, X.columns
+
+def champion_challenger_evaluation(challenger_model, challenger_mae, feature_columns):
+    """So sánh với model hiện tại (nếu có) và quyết định lưu đè"""
+    os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
+    
+    if os.path.exists(MODEL_PATH):
+        try:
+            # Tải model cũ (Champion) và meta-data
+            saved_data = joblib.load(MODEL_PATH)
+            champion_mae = saved_data.get('mae', float('inf'))
+            
+            print(f"🥊 Đang so sánh... Champion MAE: {champion_mae:.4f} vs Challenger MAE: {challenger_mae:.4f}")
+            
+            if challenger_mae < champion_mae:
+                print("🏆 Challenger chiến thắng! Cập nhật mô hình mới vào hệ thống.")
+                save_model(challenger_model, challenger_mae, feature_columns)
+            else:
+                print("🛡️ Champion bảo vệ ngôi vương. Giữ nguyên mô hình cũ.")
+        except Exception as e:
+            print(f"⚠️ Lỗi đọc model cũ ({e}). Đang ghi đè model mới...")
+            save_model(challenger_model, challenger_mae, feature_columns)
+    else:
+        print("🌟 Chưa có model trong hệ thống. Đang lưu Challenger làm Champion đầu tiên!")
+        save_model(challenger_model, challenger_mae, feature_columns)
+
+def save_model(model, mae, columns):
+    # Lưu cả model, MAE và danh sách cột (để đảm bảo input pipeline chuẩn xác lúc dự đoán)
+    model_data = {
+        'model': model,
+        'mae': mae,
+        'features': list(columns)
+    }
+    joblib.dump(model_data, MODEL_PATH)
+    print(f"💾 Đã lưu tại: {MODEL_PATH}")
 
 if __name__ == "__main__":
-    train_and_evaluate()
+    df = load_data_from_db()
+    if len(df) > 50: # Đảm bảo có đủ dữ liệu cơ bản
+        X, y = preprocess_features(df)
+        best_model, mae, features = train_and_evaluate(X, y)
+        champion_challenger_evaluation(best_model, mae, features)
+    else:
+        print("⚠️ Dữ liệu trong DB quá ít để huấn luyện (Yêu cầu > 50 bản ghi).")
