@@ -90,5 +90,5 @@ def save_data(data):
 
 if __name__ == "__main__":
     # Điểm chạy test
-    data = run_crawler(pages=100)
+    data = run_crawler(pages=10)
     save_data(data)

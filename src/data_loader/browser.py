@@ -3,7 +3,7 @@ import undetected_chromedriver as uc
 import subprocess
 import re
 import platform
-from src.config import IS_GITHUB_ACTION
+from src.config.crawler import IS_GITHUB_ACTIONS
 
 def get_chrome_version():
     """
@@ -60,7 +60,7 @@ def get_chrome_version():
         
     return version
 
-def init_driver(headless=IS_GITHUB_ACTION):
+def init_driver(headless=IS_GITHUB_ACTIONS):
     """Khởi tạo Chrome Driver với cấu hình Anti-Detect"""
     print("[Browser] Đang khởi tạo trình duyệt...")
     options = uc.ChromeOptions()

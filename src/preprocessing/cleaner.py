@@ -4,6 +4,7 @@ import os
 import numpy as np
 import sys
 import re
+import hashlib
 from datetime import datetime
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from src.database.postgres_manager import PostgresManager
@@ -128,12 +129,30 @@ def process_and_save():
     df_clean = df_clean.drop_duplicates(subset=['title', 'area', 'published_date'], keep='last')
     print(f"✅ Giữ lại {len(df_clean)}/{len(df)} tin hợp lệ.")
 
-    final_columns = ['title', 'price_billion', 'area', 'ward', 'property_type', 'bedrooms', 'bathrooms', 'published_date']
+    # Nhà 999 tỷ, 0.001m2 vẫn lọt vào DB
+    df_clean = df_clean[
+        df_clean['price_billion'].between(0.1, 200) &
+        df_clean['area'].between(5, 10000)
+    ]
+
+    # 🌟 MỚI: Tạo Unique ID (listing_id) dựa trên các trường quan trọng
+    df_clean['listing_id'] = df_clean.apply(
+        lambda row: hashlib.md5(f"{row['title']}_{row['area']}_{row['published_date']}".encode('utf-8')).hexdigest(), 
+        axis=1
+    )
+    
+    print(f"✅ Giữ lại {len(df_clean)}/{len(df)} tin hợp lệ.")
+
+    # Thêm 'listing_id' vào danh sách cột cuối cùng
+    final_columns = ['listing_id', 'title', 'price_billion', 'area', 'ward', 'property_type', 'bedrooms', 'bathrooms', 'published_date']
     df_final = df_clean[final_columns]
 
-    # Khởi tạo DB Manager và lưu trữ
+    # Khởi tạo DB Manager
     db = PostgresManager()
-    db.save_dataframe(df=df_final, table_name='listings', if_exists='replace')
+    
+    # 🌟 MỚI: Gọi phương thức Upsert thay vì dùng if_exists='replace'
+    print("Đang thực hiện Upsert dữ liệu vào PostgreSQL...")
+    db.upsert_dataframe(df=df_final, table_name='listings', unique_key='listing_id')
     
     # Lưu backup ra CSV (Tùy chọn)
     df_final.to_csv(CLEANED_DATA_PATH, index=False, encoding='utf-8-sig')
