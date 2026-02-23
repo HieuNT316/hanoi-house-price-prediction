@@ -7,7 +7,7 @@ import re
 from datetime import datetime
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from src.database.postgres_manager import PostgresManager
-from src import config
+from src.config.path import RAW_CSV_PATH, CLEANED_DATA_PATH
 
 # --- CÁC HÀM TIỀN XỬ LÝ CƠ BẢN ---
 def extract_ward(location_str):
@@ -71,14 +71,14 @@ def extract_room_number(row, col_name, keywords):
 
 # --- LUỒNG XỬ LÝ CHÍNH ---
 def process_and_save():
-    if not os.path.exists(config.RAW_CSV_PATH):
-        print(f"Không tìm thấy file tại: {config.RAW_CSV_PATH}")
+    if not os.path.exists(RAW_CSV_PATH):
+        print(f"Không tìm thấy file tại: {RAW_CSV_PATH}")
         return
 
     print("Đang đọc dữ liệu thô...")
     try:
         # Xóa khai báo column_names cứng, để Pandas tự nhận diện header
-        df = pd.read_csv(config.RAW_CSV_PATH, on_bad_lines='skip', engine='python')
+        df = pd.read_csv(RAW_CSV_PATH, on_bad_lines='skip', engine='python')
         
         # Sửa lỗi dòng Header bị lặp lại trong thân file (do crawler chạy nhiều lần)
         if 'title' in df.columns:
@@ -136,7 +136,7 @@ def process_and_save():
     db.save_dataframe(df=df_final, table_name='listings', if_exists='replace')
     
     # Lưu backup ra CSV (Tùy chọn)
-    df_final.to_csv(config.CLEANED_DATA_PATH, index=False, encoding='utf-8-sig')
+    df_final.to_csv(CLEANED_DATA_PATH, index=False, encoding='utf-8-sig')
     print("✅ Hoàn tất Pipeline ETL.")
 
 if __name__ == "__main__":

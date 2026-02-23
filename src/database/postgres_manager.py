@@ -3,14 +3,14 @@ from sqlalchemy import create_engine
 import pandas as pd
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-from src import config
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from src.config.database import POSTGRES_URI
 
 class PostgresManager:
     def __init__(self):
         """Khởi tạo kết nối tới PostgreSQL sử dụng SQLAlchemy Engine"""
         try:
-            self.engine = create_engine(config.POSTGRES_URI)
+            self.engine = create_engine(POSTGRES_URI)
             print("✅ Đã kết nối thành công tới PostgreSQL.")
         except Exception as e:
             print(f"❌ Lỗi kết nối Database: {e}")

@@ -8,12 +8,11 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-from src import config
+from src.config.path import MODEL_PATH
 from src.database.postgres_manager import PostgresManager
 
 # Đường dẫn lưu Model Champion
-MODEL_PATH = config.MODEL_PATH
+MODEL_PATH = MODEL_PATH
 
 def load_data_from_db():
     print("🔄 Đang lấy dữ liệu từ PostgreSQL...")

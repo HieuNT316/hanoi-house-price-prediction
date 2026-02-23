@@ -9,7 +9,8 @@ import os
 # Import modules từ project
 # Thêm đường dẫn project vào sys.path để import được src
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-from src import config
+from src.config.crawler import BASE_URL
+from src.config.path import RAW_CSV_PATH
 from src.data_loader.browser import init_driver
 
 def extract_card_data(card_element):
@@ -51,7 +52,7 @@ def run_crawler(pages=2):
     
     try:
         for p in range(1, pages + 1):
-            url = config.BASE_URL if p == 1 else f"{config.BASE_URL}/p{p}"
+            url = BASE_URL if p == 1 else f"{BASE_URL}/p{p}"
             print(f"[Spider] Đang cào trang {p}/{pages}: {url}")
             
             try:
@@ -82,10 +83,10 @@ def save_data(data):
         print("[Spider] Không có dữ liệu mới.")
         return
 
-    header = not os.path.exists(config.RAW_CSV_PATH)
+    header = not os.path.exists(RAW_CSV_PATH)
     df = pd.DataFrame(data)
-    df.to_csv(config.RAW_CSV_PATH, mode='a', index=False, header=header, encoding='utf-8-sig')
-    print(f"[Spider] Đã lưu {len(df)} dòng vào: {config.RAW_CSV_PATH}")
+    df.to_csv(RAW_CSV_PATH, mode='a', index=False, header=header, encoding='utf-8-sig')
+    print(f"[Spider] Đã lưu {len(df)} dòng vào: {RAW_CSV_PATH}")
 
 if __name__ == "__main__":
     # Điểm chạy test
