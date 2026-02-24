@@ -1,7 +1,8 @@
 # src/config/crawler.py
 
 BASE_URL = 'https://batdongsan.com.vn/nha-dat-ban-ha-dong'
-IS_GITHUB_ACTIONS = False  # Cờ này có thể dùng để điều chỉnh hành vi crawler khi chạy trên GitHub Actions (nếu cần)
+# Cờ điều chỉnh hành vi crawler khi chạy tự động ngầm qua Task Scheduler
+IS_TASK_SCHEDULER_ENV = True
 
 # Có thể mở rộng thêm sau này:
 # CAU_GIAY_URL = 'https://batdongsan.com.vn/nha-dat-ban-cau-giay'

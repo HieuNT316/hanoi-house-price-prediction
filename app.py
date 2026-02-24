@@ -1,8 +1,11 @@
 # app.py
 import streamlit as st
-import pandas as pd
 import os
 from streamlit_float import *
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # --- IMPORT MODULES CỦA BẠN ---
 from src.ai_engine.chatbot import render_chatbot
@@ -32,9 +35,7 @@ def load_data():
         st.error(f"❌ Lỗi kết nối Database: {e}")
         return None
 
-# =========================================================
 # GIAO DIỆN CHÍNH (MAIN APP)
-# =========================================================
 st.title("🏡 Hệ Thống Phân Tích & Định Giá BĐS Hà Đông")
 
 # 1. Load dữ liệu tổng từ DB
@@ -48,18 +49,19 @@ if df is None:
 tab1, tab2 = st.tabs(["📊 Thống Kê Thị Trường", "🔮 AI Định Giá"])
 
 with tab1:
-    # Truyền df vào dashboard (Giữ nguyên logic của bạn)
     render_dashboard(df)
 
 with tab2:
-    # Gọi AI UI cực kỳ gọn gàng, không cần truyền model hay columns nữa
     render_prediction(df)
 
-# =========================================================
 # CHATBOT (MODULE RIÊNG)
-# =========================================================
-try:
-    API_KEY = st.secrets["GEMINI_API_KEY"]
-    render_chatbot(df, API_KEY)
-except Exception as e:
-    st.warning("⚠️ Chưa cấu hình GEMINI_API_KEY trong file `.streamlit/secrets.toml`. Chatbot hiện đang bị vô hiệu hóa.")
+API_KEY = os.getenv("GEMINI_API_KEY")
+
+if API_KEY:
+    try:
+        render_chatbot(df, API_KEY)
+    except Exception as e:
+        st.error(f"❌ Lỗi khi khởi tạo Chatbot: {e}")
+else:
+    # Cập nhật lại câu cảnh báo cho đúng với cơ chế file .env
+    st.warning("⚠️ Chưa cấu hình GEMINI_API_KEY trong file `.env`. Chatbot hiện đang bị vô hiệu hóa.")

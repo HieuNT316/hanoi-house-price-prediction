@@ -3,8 +3,10 @@ import undetected_chromedriver as uc
 import subprocess
 import re
 import platform
-from src.config.crawler import IS_GITHUB_ACTIONS
 import sys
+
+from src.config.crawler import IS_TASK_SCHEDULER_ENV 
+
 # Ép Python xuất dữ liệu text ra terminal hoặc file log bằng chuẩn UTF-8
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -31,11 +33,11 @@ def get_chrome_version():
                 match = re.search(r'version\s+REG_SZ\s+(\d+)', output)
                 if match:
                     version = int(match.group(1))
-            except:
+            except Exception:
                 pass
 
         elif system_name == "Linux":
-            # Cách 2: Chạy lệnh terminal trên Linux (cho GitHub Actions)
+            # Cách 2: Chạy lệnh terminal trên Linux
             try:
                 cmd_list = ['google-chrome', 'google-chrome-stable', 'chromium-browser', 'chromium']
                 for cmd in cmd_list:
@@ -50,26 +52,32 @@ def get_chrome_version():
                                 break
                     except FileNotFoundError:
                         continue
-            except:
+            except Exception:
                 pass
                 
     except Exception as e:
-        print(f"Không dò được version Chrome: {e}")
+        print(f"[Browser] Không dò được version Chrome: {e}")
 
     if version:
-        print(f"Phát hiện Chrome ({system_name}): Version {version}")
+        print(f"[Browser] Phát hiện Chrome ({system_name}): Version {version}")
     else:
-        print(f"Không tìm thấy Chrome trên {system_name}. Sẽ để thư viện tự quyết định.")
+        print(f"[Browser] Không tìm thấy Chrome trên {system_name}. Sẽ để thư viện tự quyết định.")
         
     return version
 
-def init_driver(headless=IS_GITHUB_ACTIONS):
+# Cập nhật tham số mặc định thành cờ Task Scheduler
+def init_driver(headless=IS_TASK_SCHEDULER_ENV):
     """Khởi tạo Chrome Driver với cấu hình Anti-Detect"""
     print("[Browser] Đang khởi tạo trình duyệt...")
     options = uc.ChromeOptions()
     args = [
-        "--disable-popup-blocking", "--disable-notifications",
-        "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu"
+        "--disable-popup-blocking", 
+        "--disable-notifications",
+        "--no-sandbox", 
+        "--disable-dev-shm-usage", 
+        "--disable-gpu",
+        "--window-size=1920,1080", # Rất quan trọng cho headless
+        "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
     ]
     for arg in args:
         options.add_argument(arg)

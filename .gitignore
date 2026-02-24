@@ -8,10 +8,13 @@ __pycache__/
 
 # QUAN TRỌNG: Chặn lộ API KEY và Secrets
 .streamlit/secrets.toml
-.env
 
 # (Tùy chọn) Chặn dữ liệu nếu file quá nặng > 100MB
 # data/*.csv
 # data/*.db
+
+# Environments
+.env
+.env.*
 
 venv_bds/

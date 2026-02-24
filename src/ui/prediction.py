@@ -10,8 +10,6 @@ from src.config.path import MODEL_PATH
 
 
 # Khởi tạo đối tượng Predictor (Dùng cache để không load lại model mỗi lần click)
-MODEL_PATH = MODEL_PATH
-
 @st.cache_resource
 def get_predictor():
     return PricePredictor(MODEL_PATH)

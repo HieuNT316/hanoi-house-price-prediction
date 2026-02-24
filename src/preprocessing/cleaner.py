@@ -130,7 +130,6 @@ def process_and_save():
     df_clean = df.dropna(subset=required_features, how='any')
     
     df_clean = df_clean.drop_duplicates(subset=['title', 'area', 'published_date'], keep='last')
-    print(f"✅ Giữ lại {len(df_clean)}/{len(df)} tin hợp lệ.")
 
     # Nhà 999 tỷ, 0.001m2 vẫn lọt vào DB
     df_clean = df_clean[

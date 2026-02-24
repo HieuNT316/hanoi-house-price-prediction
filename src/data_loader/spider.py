@@ -49,35 +49,66 @@ def extract_card_data(card_element):
 
     return data
 
-def run_crawler(pages=2):
+def run_crawler(pages=2, max_retries=3):
+    """
+    Hàm cào dữ liệu có tích hợp cơ chế Auto-Retry để vượt qua Cloudflare.
+    - max_retries: Số lần thử tải lại trang tối đa nếu bị chặn.
+    """
     driver = init_driver()
     results = []
     
     try:
         for p in range(1, pages + 1):
             url = BASE_URL if p == 1 else f"{BASE_URL}/p{p}"
-            print(f"[Spider] Đang cào trang {p}/{pages}: {url}")
+            print(f"\n[Spider] Đang cào trang {p}/{pages}: {url}")
             
-            try:
-                driver.get(url)
-                time.sleep(random.uniform(5, 8))
-                
-                cards = driver.find_elements(By.CSS_SELECTOR, '.js__card')
-                for card in cards:
-                    # Logic bóc tách
-                    try:
-                        data = extract_card_data(card)
-                        #print(f"[Spider] Bóc tách: {data['title']} | {data['price']} | {data['area']} | {data['location']} | {data['published_date']}")
-                        if data['title']:  # Chỉ lấy tin có tiêu đề
-                            results.append(data)
-                    except: continue
+            for attempt in range(1, max_retries + 1):
+                try:
+                    if attempt == 1:
+                        driver.get(url)
+                    else:
+                        print(f"[Spider] 🔄 Đang thử tải lại lần {attempt}/{max_retries} cho trang {p}...")
+                        driver.refresh() # Tải lại trang sau khi Cloudflare cấp cookie
                     
-            except Exception as e:
-                print(f"[Spider] Lỗi tại trang {p}: {e}")
-                
+                    # Chờ trang load hoàn toàn hoặc chờ Cloudflare duyệt JS
+                    time.sleep(random.uniform(7, 10))
+                    
+                    cards = driver.find_elements(By.CSS_SELECTOR, '.js__card')
+                    
+                    if len(cards) > 0:
+                        print(f"[Spider] ✅ Thành công: Tìm thấy {len(cards)} tin đăng ở trang {p}.")
+                        for card in cards:
+                            try:
+                                data = extract_card_data(card)
+                                if data['title']:  
+                                    results.append(data)
+                            except Exception: 
+                                continue
+                        break # Thoát vòng lặp retry vì đã lấy được dữ liệu thành công
+                        
+                    else:
+                        print(f"[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt {attempt}). Có thể đang bị Cloudflare chặn.")
+                        
+                        # Nếu đã thử hết số lần mà vẫn thất bại mới chụp ảnh debug
+                        if attempt == max_retries:
+                            debug_path = os.path.join(os.path.dirname(__file__), f"debug_page_{p}.png")
+                            driver.save_screenshot(debug_path)
+                            print(f"[Spider] 📸 Đã lưu ảnh màn hình lỗi cuối cùng tại: {debug_path}")
+                        else:
+                            # Nghỉ ngơi thêm 5 giây trước khi refresh để chắc chắn Cloudflare đã duyệt xong
+                            time.sleep(5)
+                            
+                except Exception as e:
+                    print(f"[Spider] Lỗi tại trang {p} (Attempt {attempt}): {e}")
+                    if attempt == max_retries:
+                        break
+                    time.sleep(3) # Chờ 1 chút rồi thử lại
+                    
     finally:
-        try: driver.quit()
-        except: pass
+        try: 
+            driver.quit()
+        except Exception: 
+            pass
         
     return results
 
@@ -93,5 +124,5 @@ def save_data(data):
 
 if __name__ == "__main__":
     # Điểm chạy test
-    data = run_crawler(pages=100)
+    data = run_crawler(pages=10)
     save_data(data)
