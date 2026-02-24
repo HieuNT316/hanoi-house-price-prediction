@@ -44,28 +44,29 @@ def render_prediction(df):
             in_bathrooms = st.number_input("Số phòng tắm/WC:", min_value=1, value=2, step=1, key="pred_bath")
 
     if st.button("🔮 Định giá ngay", type="primary"):
-        try:
-            # GỌI AI ENGINE (Giao diện hoàn toàn không biết cấu trúc One-Hot bên trong)
-            pred_price, mae = predictor.predict_single(
-                area=in_area, 
-                bedrooms=in_bedrooms, 
-                bathrooms=in_bathrooms, 
-                ward=in_ward, 
-                property_type=in_type
-            )
-            
-            pred_m2 = (pred_price * 1000) / in_area
-            
-            st.success(f"💰 Mức giá khuyến nghị: **{pred_price:.2f} Tỷ**")
-            st.caption(f"Tương đương: **{pred_m2:.1f} Triệu/m2**")
-            
-            avg_area_price = df[(df['ward'] == in_ward) & (df['property_type'] == in_type)]['price_billion'].mean()
-            if pd.notna(avg_area_price):
-                diff = pred_price - avg_area_price
-                if diff > 0:
-                    st.info(f"📈 Cao hơn mức trung bình của {in_type} tại {in_ward} khoảng {diff:.2f} Tỷ")
-                elif diff < 0:
-                    st.info(f"📉 Thấp hơn mức trung bình của {in_type} tại {in_ward} khoảng {abs(diff):.2f} Tỷ")
-                    
-        except Exception as e:
-            st.error(f"Lỗi khi dự đoán: {e}")
+            try:
+                # Hứng 3 giá trị trả về từ Predictor
+                pred_price, pred_unit_price, mae = predictor.predict_single(
+                    area=in_area, 
+                    bedrooms=in_bedrooms, 
+                    bathrooms=in_bathrooms, 
+                    ward=in_ward, 
+                    property_type=in_type
+                )
+                
+                # Quy đổi Đơn giá từ (Tỷ/m2) sang (Triệu/m2) để hiển thị cho đẹp
+                pred_m2_display = pred_unit_price * 1000
+                
+                st.success(f"💰 Mức giá khuyến nghị: **{pred_price:.2f} Tỷ**")
+                st.caption(f"Tương đương: **{pred_m2_display:.1f} Triệu/m2**")
+                
+                avg_area_price = df[(df['ward'] == in_ward) & (df['property_type'] == in_type)]['price_billion'].mean()
+                if pd.notna(avg_area_price):
+                    diff = pred_price - avg_area_price
+                    if diff > 0:
+                        st.info(f"📈 Cao hơn mức trung bình của {in_type} tại {in_ward} khoảng {diff:.2f} Tỷ")
+                    elif diff < 0:
+                        st.info(f"📉 Thấp hơn mức trung bình của {in_type} tại {in_ward} khoảng {abs(diff):.2f} Tỷ")
+                        
+            except Exception as e:
+                st.error(f"Lỗi khi dự đoán: {e}")

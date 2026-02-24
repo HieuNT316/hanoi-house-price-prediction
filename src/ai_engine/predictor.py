@@ -46,8 +46,11 @@ class PricePredictor:
         if type_col in input_df.columns:
             input_df[type_col] = 1
 
-        # 4. Thực hiện dự đoán
-        pred_price = self.model.predict(input_df)[0]
+        # 4. Thực hiện dự đoán (LƯU Ý: Model giờ dự đoán ĐƠN GIÁ - Tỷ/m2)
+        pred_unit_price = self.model.predict(input_df)[0]
         
-        # Trả về cả giá dự đoán và sai số MAE của mô hình
-        return pred_price, self.mae
+        # 5. Quy đổi ra TỔNG GIÁ (Tỷ VNĐ)
+        pred_total_price = pred_unit_price * area
+        
+        # Trả về Tổng giá, Đơn giá và MAE
+        return pred_total_price, pred_unit_price, self.mae
