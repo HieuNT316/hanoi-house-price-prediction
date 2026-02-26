@@ -121,8 +121,6 @@ def process_and_save():
     # Bỏ 'bedrooms' khỏi subset dropna vì chúng ta sẽ dùng KNN để nội suy
     required_features = ['title', 'price_billion', 'area', 'location', 'property_type']
     df_clean = df.dropna(subset=required_features, how='any').copy()
-    
-    df_clean = df_clean.drop_duplicates(subset=['title', 'area', 'published_date'], keep='last')
 
     # 1. Lọc theo biên (Bounding Box) dựa trên biểu đồ phân phối
     df_clean = df_clean[
@@ -156,7 +154,9 @@ def process_and_save():
 
     # --- 6. TẠO ID & LƯU TRỮ ---
     df_clean['listing_id'] = df_clean.apply(
-        lambda row: hashlib.md5(f"{row['title']}_{row['area']}_{row['published_date']}".encode('utf-8')).hexdigest(), 
+        lambda row: hashlib.md5(
+            f"{row['title']}_{row['area']}_{row['ward']}_{row['property_type']}_{row['price_billion']}_{row['published_date']}".encode('utf-8')
+        ).hexdigest(), 
         axis=1
     )
     
@@ -164,6 +164,9 @@ def process_and_save():
 
     final_columns = ['listing_id', 'title', 'price_billion', 'area', 'ward', 'property_type', 'bedrooms', 'bathrooms', 'published_date']
     df_final = df_clean[final_columns]
+
+    # BƯỚC LỌC BẮT BUỘC: Đảm bảo không có ID trùng lặp trong lô hàng gửi đi
+    df_final = df_final.drop_duplicates(subset=['listing_id'], keep='last')
 
     db = PostgresManager()
     

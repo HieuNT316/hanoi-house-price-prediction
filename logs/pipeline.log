@@ -244,3 +244,62 @@ Fitting 3 folds for each of 72 candidates, totalling 216 fits
  2 files changed, 3125 insertions(+), 2086 deletions(-)
 To https://github.com/Alexus143/hanoi-house-price-prediction.git
    83b9f71..d82b174  main -> main
+========================================= 
+[Thu 02/26/2026 11:31:07.03] BAT DAU PIPELINE 
+[Browser] Đang khởi tạo trình duyệt...
+[Browser] Phát hiện Chrome (Windows): Version 139
+
+[Spider] Đang cào trang 1/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 1.
+
+[Spider] Đang cào trang 2/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p2
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 2.
+
+[Spider] Đang cào trang 3/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p3
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 3.
+
+[Spider] Đang cào trang 4/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p4
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 4.
+
+[Spider] Đang cào trang 5/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p5
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 5.
+
+[Spider] Đang cào trang 6/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p6
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 6.
+
+[Spider] Đang cào trang 7/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p7
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 7.
+
+[Spider] Đang cào trang 8/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p8
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 8.
+
+[Spider] Đang cào trang 9/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p9
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 9.
+
+[Spider] Đang cào trang 10/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p10
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 10.
+[Spider] Đã lưu 230 dòng vào: D:\Python\realtime_estimate_tracker\data\batdongsan_data.csv
+Đang đọc dữ liệu thô...
+Tổng số dòng thô: 22819
+🧠 Đang áp dụng NLP trích xuất Đặc trưng & Phân loại...
+🧠 Đang áp dụng KNN Imputer để xử lý missing data cho số phòng...
+✅ Giữ lại 9085/22819 tin hợp lệ.
+✅ Đã kết nối thành công tới PostgreSQL.
+Đang thực hiện Upsert dữ liệu vào PostgreSQL...
+✅ Hoàn tất Pipeline ETL.
+🔄 Đang lấy dữ liệu từ PostgreSQL...
+✅ Đã kết nối thành công tới PostgreSQL.
+✅ Đã tải 15077 bản ghi để huấn luyện.
+🧠 Đang chia tập dữ liệu và thiết lập Cross-Validation...
+⏳ Đang huấn luyện (Học cách dự đoán ĐƠN GIÁ)...
+Fitting 3 folds for each of 72 candidates, totalling 216 fits
+✅ Tham số tối ưu: {'max_depth': 20, 'max_features': 1.0, 'min_samples_leaf': 2, 'min_samples_split': 5, 'n_estimators': 300}
+📊 MAE của Challenger Model (Trên Tổng giá): 1.6605 Tỷ VNĐ
+🥊 Đang so sánh... Champion MAE: 1.8288 vs Challenger MAE: 1.6605
+🏆 Challenger chiến thắng! Cập nhật mô hình mới vào hệ thống.
+💾 Đã lưu tại: D:\Python\realtime_estimate_tracker\models\house_price_model.pkl
+[main 0208b49] Auto-update: Thu 02/26/2026 11:37:24.08
+ 4 files changed, 2731 insertions(+), 2316 deletions(-)
+Uploading LFS objects: 100% (1/1), 63 MB | 8.3 MB/s, done.
+To https://github.com/Alexus143/hanoi-house-price-prediction.git
+   d82b174..0208b49  main -> main
