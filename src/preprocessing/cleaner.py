@@ -155,18 +155,18 @@ def process_and_save():
     # --- 6. TẠO ID & LƯU TRỮ ---
     df_clean['listing_id'] = df_clean.apply(
         lambda row: hashlib.md5(
-            f"{row['title']}_{row['area']}_{row['ward']}_{row['property_type']}_{row['price_billion']}_{row['published_date']}".encode('utf-8')
+            f"{row['area']}_{row['ward']}_{row['property_type']}_{row['price_billion']}_{row['bedrooms']}_{row['bathrooms']}".encode('utf-8')
         ).hexdigest(), 
         axis=1
     )
-    
-    print(f"✅ Giữ lại {len(df_clean)}/{len(df)} tin hợp lệ.")
 
     final_columns = ['listing_id', 'title', 'price_billion', 'area', 'ward', 'property_type', 'bedrooms', 'bathrooms', 'published_date']
     df_final = df_clean[final_columns]
 
     # BƯỚC LỌC BẮT BUỘC: Đảm bảo không có ID trùng lặp trong lô hàng gửi đi
     df_final = df_final.drop_duplicates(subset=['listing_id'], keep='last')
+
+    print(f"✅ Giữ lại {len(df_clean)}/{len(df)} tin hợp lệ.")
 
     db = PostgresManager()
     
