@@ -70,6 +70,8 @@ def init_driver(headless=IS_TASK_SCHEDULER_ENV):
     """Khởi tạo Chrome Driver với cấu hình Anti-Detect"""
     print("[Browser] Đang khởi tạo trình duyệt...")
     options = uc.ChromeOptions()
+    # Ép trình duyệt không chờ tải ảnh/iframe, có HTML là chiến luôn
+    options.page_load_strategy = 'eager'
     args = [
         "--disable-popup-blocking", 
         "--disable-notifications",

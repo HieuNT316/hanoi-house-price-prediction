@@ -90,9 +90,11 @@ def run_detail_spider(table_name="bds_hadong", limit=50):
             print(f"\n[DetailSpider] Đang cào ({idx}/{len(listings_to_scrape)}): {url}")
             
             try:
+                # 🌟 Đặt tối hậu thư: Quá 30 giây tải trang là cắt!
+                driver.set_page_load_timeout(30)
                 driver.get(url)
                 
-                # Sleep chống bot
+                # Sleep chống bot (vẫn cần thiết)
                 time.sleep(random.uniform(8, 15)) 
                 
                 enriched_data = extract_specifications(driver)
@@ -107,7 +109,13 @@ def run_detail_spider(table_name="bds_hadong", limit=50):
                 success_count += 1
                 
             except Exception as e:
-                print(f"[DetailSpider] ❌ Lỗi khi xử lý {url}: {e}")
+                error_msg = str(e).lower()
+                
+                if "timeout" in error_msg:
+                    print("⚠️ Mạng quá chậm! Bỏ qua link này để tránh treo hệ thống.")
+                    continue # Cắt lỗ, đi cào link tiếp theo luôn
+                
+                print(f"[DetailSpider] ❌ Lỗi khi xử lý: {e}")
                 
                 # 🌟 KỸ THUẬT HỒI SINH TRÌNH DUYỆT TẠI ĐÂY 🌟
                 error_msg = str(e).lower()
@@ -133,4 +141,4 @@ def run_detail_spider(table_name="bds_hadong", limit=50):
 
 if __name__ == "__main__":
     # Test chạy thử 5 bài
-    run_detail_spider(table_name="bds_hadong", limit=150)
+    run_detail_spider(table_name="bds_hadong", limit=50)
