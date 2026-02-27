@@ -133,4 +133,4 @@ def run_detail_spider(table_name="bds_hadong", limit=50):
 
 if __name__ == "__main__":
     # Test chạy thử 5 bài
-    run_detail_spider(table_name="bds_hadong", limit=5)
+    run_detail_spider(table_name="bds_hadong", limit=150)

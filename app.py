@@ -23,7 +23,7 @@ def load_data():
     try:
         db = PostgresManager()
         # Query toàn bộ bảng listings
-        query = "SELECT * FROM listings"
+        query = "SELECT * FROM bds_hadong"
         df = db.load_dataframe(query)
         
         # Nếu DB chưa có dữ liệu, trả về None

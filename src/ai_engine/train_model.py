@@ -21,7 +21,7 @@ def load_data_from_db():
     query = """
         SELECT price_billion, area, ward, property_type, bedrooms, bathrooms,
                frontage, road_width, direction, floors, legal_status, furniture
-        FROM listings 
+        FROM bds_hadong 
         WHERE price_billion IS NOT NULL AND area IS NOT NULL
     """
     df = db.load_dataframe(query)
