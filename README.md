@@ -50,90 +50,95 @@ Hệ thống được phân tách thành các module độc lập, hoạt độn
 ├── app.py                            # Khởi chạy giao diện Streamlit UI & cấu hình Cache
 ├── src/
 │   ├── config/
-│   │   ├── crawler.py                # Tham số cho Spider/Crawler
-│   │   ├── database.py               # Cấu hình kết nối PostgreSQL
-│   │   └── path.py                   # Quản lý đường dẫn file tập trung
+│   │   ├── crawler.py                
+│   │   ├── database.py               
+│   │   └── path.py                   
 │   ├── data_loader/
-│   │   ├── browser.py                # Khởi tạo Selenium Driver
-│   │   ├── spider.py                 # Crawler Luồng 1 (Quét bề mặt)
-│   │   └── detail_spider.py          # Crawler Luồng 2 (Cào chi tiết)
+│   │   ├── browser.py                
+│   │   ├── spider.py                 
+│   │   └── detail_spider.py          
 │   ├── database/
-│   │   └── postgres_manager.py       # Tương tác DB, xử lý Upsert/Update dữ liệu
+│   │   └── postgres_manager.py       
 │   ├── preprocessing/
-│   │   └── cleaner.py                # Pipeline ETL, làm sạch dữ liệu & Regex
+│   │   └── cleaner.py                
 │   ├── ai_engine/
-│   │   ├── train_model.py            # Huấn luyện mô hình, Champion-Challenger evaluation
-│   │   ├── predictor.py              # Xử lý luồng dự đoán giá
-│   │   └── chatbot.py                # Render Chatbot với Gemini API
+│   │   ├── train_model.py            
+│   │   ├── predictor.py              
+│   │   └── chatbot.py                
 │   └── ui/
-│       ├── dashboard.py              # Giao diện biểu đồ thống kê
-│       └── prediction.py             # Giao diện nhập liệu định giá
-├── tests/                            # Chứa các file unit test (sử dụng pytest và unittest.mock)
-├── data/                             # Chứa dữ liệu thô (.csv) 
-├── models/                           # Chứa file house_price_model.pkl
-├── logs/                             # Chứa log hệ thống
-├── automation/                       # Các script tự động hóa (.bat, .vbs)
+│       ├── dashboard.py              
+│       └── prediction.py             
+├── tests/                            
+├── data/                             
+├── models/                           
+├── logs/                             
+├── automation/                       
 ├── requirements.txt
 └── README.md
+🧠 Quy tắc Nghiệp vụ Bắt buộc (ETL & NLP)
+Xử lý ngoại lệ "Đất nền": Hệ thống tự động phân loại bất động sản. Nếu property_type là "Đất nền", thuật toán ép buộc gán số lượng phòng ngủ/phòng tắm bằng 0 để tránh gây nhiễu cho mô hình.
 
-```
+Trích xuất bằng ngôn ngữ tự nhiên: Tự động đọc hiểu "ngôn ngữ môi giới" (vd: "3pn", "2wc") từ tiêu đề và mô tả trong trường hợp dữ liệu crawl bị thiếu hụt.
 
-## 🧠 Quy tắc Nghiệp vụ Bắt buộc (ETL & NLP)
+⚖️ Trade-offs & Limitations
+Trong quá trình thiết kế hệ thống, các quyết định sau được thực thi dựa trên sự đánh đổi giữa tài nguyên, thời gian và ràng buộc hạ tầng:
 
-* **Xử lý ngoại lệ "Đất nền":** Hệ thống tự động phân loại bất động sản. Nếu `property_type` là "Đất nền", thuật toán ép buộc gán số lượng phòng ngủ/phòng tắm bằng `0` để tránh gây nhiễu cho mô hình.
-* **Trích xuất bằng ngôn ngữ tự nhiên:** Tự động đọc hiểu "ngôn ngữ môi giới" (vd: "3pn", "2wc") từ tiêu đề và mô tả trong trường hợp dữ liệu crawl bị thiếu hụt.
+1. Kiến trúc Thu thập Dữ liệu
+Trade-off: Sử dụng Selenium (Undetected Chromedriver) thay vì HTTP Requests (Scrapy/BeautifulSoup). Việc này đánh đổi tốc độ thực thi và tài nguyên phần cứng (RAM/CPU cao) lấy khả năng vượt qua cơ chế Cloudflare Anti-bot.
 
-## 🚀 Hướng Dẫn Cài Đặt & Vận Hành
+Limitation: Độ ổn định phụ thuộc hoàn toàn vào cấu trúc DOM của trang web. Nếu nền tảng thay đổi giao diện, quá trình bóc tách sẽ thất bại. Mạng yếu có thể gây gián đoạn luồng cào dữ liệu chi tiết.
 
-### Bước 1: Khởi tạo Môi trường
+2. Định danh Dữ liệu (Deduplication)
+Trade-off: Sử dụng MD5 Hash dựa trên đặc trưng vật lý (diện tích, giá, phân khúc) để tạo listing_id cho cơ chế Upsert. Tiêu đề và ngày đăng bị loại bỏ khỏi hàm băm nhằm ngăn chặn hành vi đăng lại bài cùng một bất động sản từ các môi giới khác nhau.
 
-```bash
+Limitation: Nếu thông số bị chỉnh sửa nhẹ (ví dụ diện tích từ 50m² thành 50.5m²) kèm thay đổi giá, hệ thống sẽ xác định đây là bản ghi mới, dẫn đến rò rỉ dữ liệu trùng lặp (Duplicate Data Leakage) trong PostgreSQL.
+
+3. Mô hình Học máy
+Trade-off: Lựa chọn RandomForestRegressor thay vì các thuật toán Boosting (XGBoost) hoặc Deep Learning. Quyết định này giữ cho mô hình nhẹ, dễ huấn luyện tại máy cục bộ và tính toán Feature Importance rõ ràng, nhưng hy sinh độ chính xác khi nội suy các mối quan hệ phi tuyến phức tạp.
+
+Limitation: Thiếu dữ liệu tọa độ địa lý (Latitude/Longitude). Mô hình phân loại ranh giới thông qua "Phường" (Categorical variables), không đo lường được các yếu tố vị trí vi mô như khoảng cách ra trục đường chính, ngõ cụt hay tiện ích xung quanh.
+
+4. Tiền xử lý & NLP
+Trade-off: Xử lý văn bản tự do bằng Regex thay vì các mô hình LLM. Giải pháp này tiết kiệm tài nguyên tính toán và chi phí API, thực thi nhanh trên CPU.
+
+Limitation: Bị giới hạn bởi các patterns định nghĩa trước. Nếu mô tả chứa lỗi chính tả, từ lóng hoặc sai quy chuẩn, Regex sẽ bỏ sót đặc trưng, dẫn đến việc phải dùng KNNImputer để nội suy, làm giảm phương sai tự nhiên của bộ dữ liệu.
+
+5. Tự động hóa & CI/CD
+Trade-off: Quản lý lịch trình qua Windows Task Scheduler bằng VBScript tại Local thay vì sử dụng Apache Airflow trên Cloud. Giúp tiết kiệm chi phí hạ tầng và đơn giản hóa quá trình vận hành ban đầu.
+
+Limitation: Thiếu hệ thống giám sát và cảnh báo tự động (Alerting). Không hỗ trợ scale ngang nếu khối lượng dữ liệu phình to.
+
+🚀 Hướng Dẫn Cài Đặt & Vận Hành
+Bước 1: Khởi tạo Môi trường
+Bash
+
 git clone [https://github.com/Alexus143/hanoi-house-price-prediction.git](https://github.com/Alexus143/hanoi-house-price-prediction.git)
 cd hanoi-house-price-prediction
 pip install -r requirements.txt
+Bước 2: Cấu hình Cơ sở dữ liệu & API Key
+Database: Cập nhật thông số kết nối PostgreSQL tại src/config/database.py.
 
-```
+Gemini API: Tạo file .env tại thư mục gốc của dự án:
 
-### Bước 2: Cấu hình Cơ sở dữ liệu & API Key
+Code snippet
 
-1. **Database:** Cập nhật thông số kết nối PostgreSQL (Host, Port, User, Password, DB Name) tại `src/config/database.py`.
-2. **Gemini API:** Tạo file `.env` tại thư mục gốc của dự án và cấu hình key để kích hoạt AI Chatbot:
-
-```env
 # .env
 GEMINI_API_KEY="your-google-gemini-api-key"
+Bước 3: Kiểm thử & Quản lý file lớn
+Chạy test:
 
-```
+Bash
 
-### Bước 3: Kiểm thử & Quản lý file lớn
-
-* Chạy unit test để kiểm tra logic làm sạch, định dạng schema và pipeline:
-
-```bash
 pytest tests/
+Đảm bảo Git LFS đã được thiết lập để theo dõi file models/house_price_model.pkl.
 
-```
+Bước 4: Chạy Streamlit UI
+Bash
 
-* Đảm bảo Git LFS đã được thiết lập để quản lý file `models/house_price_model.pkl` thông qua `.gitattributes`.
-
-### Bước 4: Chạy Streamlit UI
-
-```bash
 streamlit run app.py
+Bước 5: Triển khai Tự Động Hóa (Windows Task Scheduler)
+Cấu hình chạy các file tại thư mục automation/:
 
-```
+run_fast_pipeline.bat: Chạy Luồng 1.
 
-### Bước 5: Triển khai Tự Động Hóa (Windows Task Scheduler)
-
-Hệ thống sử dụng các file VBScript chạy ngầm để thực thi các batch script quản lý luồng:
-
-1. Thiết lập Trigger trên Windows Task Scheduler.
-2. Cấu hình chạy các file tại thư mục `automation/`:
-* **`run_fast_pipeline.bat`**: Chạy Luồng 1 (`spider.py` -> `cleaner.py`) và thực hiện `git push` dữ liệu thô.
-* **`run_deep_ai_pipeline.bat`**: Chạy Luồng 2 (`detail_spider.py` -> `train_model.py`) và `git push` mô hình/dữ liệu mới.
-
-
-
-```
-
-```
+run_deep_ai_pipeline.bat: Chạy Luồng 2 và cập nhật Model.
