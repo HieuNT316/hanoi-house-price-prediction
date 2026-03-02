@@ -380,3 +380,68 @@ bash: line 1: /dev/tty: No such device or address
 error: failed to execute prompt script (exit code 1)
 fatal: could not read Username for 'https://github.com': No such file or directory
 [Sun 03/01/2026 12:18:57.79] HOAN THANH LUONG FAST 
+========================================= 
+[Mon 03/02/2026 12:52:25.49] BAT DAU LUONG FAST (QUET BE MAT) 
+[Mon 03/02/2026 12:52:25.50] [1/3] Dang cao du lieu be mat... 
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\urllib\request.py", line 1348, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\http\client.py", line 1276, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\http\client.py", line 1322, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\http\client.py", line 1271, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\http\client.py", line 1031, in _send_output
+    self.send(msg)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\http\client.py", line 969, in send
+    self.connect()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\http\client.py", line 1441, in connect
+    super().connect()
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\http\client.py", line 940, in connect
+    self.sock = self._create_connection(
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\socket.py", line 824, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "D:\Python\realtime_estimate_tracker\src\data_loader\spider.py", line 193, in <module>
+    data = run_crawler(pages=10)
+  File "D:\Python\realtime_estimate_tracker\src\data_loader\spider.py", line 109, in run_crawler
+    driver = init_driver()
+  File "D:\Python\realtime_estimate_tracker\src\data_loader\browser.py", line 99, in init_driver
+    raise e
+  File "D:\Python\realtime_estimate_tracker\src\data_loader\browser.py", line 88, in init_driver
+    driver = uc.Chrome(
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\undetected_chromedriver\__init__.py", line 258, in __init__
+    self.patcher.auto()
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\undetected_chromedriver\patcher.py", line 175, in auto
+    release = self.fetch_release_number()
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\undetected_chromedriver\patcher.py", line 259, in fetch_release_number
+    with urlopen(self.url_repo + path) as conn:
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\urllib\request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\urllib\request.py", line 519, in open
+    response = self._open(req, data)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\urllib\request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\urllib\request.py", line 496, in _call_chain
+    result = func(*args)
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\urllib\request.py", line 1391, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\urllib\request.py", line 1351, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 11001] getaddrinfo failed>
+[Browser] Đang khởi tạo trình duyệt...
+[Browser] Phát hiện Chrome (Windows): Version 139
+[Browser] Lỗi khởi tạo driver: <urlopen error [Errno 11001] getaddrinfo failed>
+[Mon 03/02/2026 12:52:42.83] LOI: Spider that bai. Dung pipeline. 
+[Mon 03/02/2026 12:52:42.85] LUONG FAST BI DUNG DO LOI 

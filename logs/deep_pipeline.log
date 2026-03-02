@@ -374,3 +374,179 @@ Fitting 3 folds for each of 72 candidates, totalling 216 fits
 📊 MAE của Challenger Model (Trên Tổng giá): 1.8608 Tỷ VNĐ
 🥊 Đang so sánh... Champion MAE: 1.7522 vs Challenger MAE: 1.8608
 🛡️ Champion bảo vệ ngôi vương. Giữ nguyên mô hình cũ.
+[main 552826c] Auto-update AI Model: Sun 03/01/2026 22:13:47.48
+ 3 files changed, 179 insertions(+), 305 deletions(-)
+ delete mode 100644 logs/pipeline.log
+To https://github.com/Alexus143/hanoi-house-price-prediction.git
+   b3918f8..552826c  main -> main
+========================================= 
+[Mon 03/02/2026 22:57:49.78] [1/3] Dang cao chi tiet BĐS... 
+
+[DetailSpider] Khởi động luồng làm giàu dữ liệu (Limit: 50 bài/lượt)...
+✅ Đã kết nối thành công tới PostgreSQL.
+[Browser] Đang khởi tạo trình duyệt...
+[Browser] Phát hiện Chrome (Windows): Version 139
+
+[DetailSpider] Đang cào (1/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-phuong-kien-hung-khu-do-thi-thanh-ha-muong-thanh/ban-cenco-5-dien-tich-200m-mat-tien-10m-ky-hd-mua-ban-truc-tiep-voi-thanh-pr42688242
+  -> Lấy được 2/6 feature chi tiết.
+
+[DetailSpider] Đang cào (2/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-phuong-yen-nghia-1-sol-lake-villa/sieu-pham-4-tang-kdt-do-ha-dong-phan-lo-o-to-tranh-kinh-doanh-o-cho-thang-may-pr45043303
+  -> Lấy được 5/6 feature chi tiết.
+
+[DetailSpider] Đang cào (3/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-duong-to-huu-phuong-la-khe-khu-do-thi-moi-an-hung/ban-gap-bt-song-lap-ha-ong-5-tang-thang-may-185m-5-tang-gia-48-ty-pr45196972
+  -> Lấy được 4/6 feature chi tiết.
+
+[DetailSpider] Đang cào (4/50): https://batdongsan.com.vn/ban-nha-rieng-duong-19-5-1-phuong-van-quan-15/cuc-hiem-ban-5-tang-pho-19-5-ngay-cau-en-39m2-mat-tien-7-6m-gia-chi-hon-9-ty-pr45187481
+  -> Lấy được 5/6 feature chi tiết.
+
+[DetailSpider] Đang cào (5/50): https://batdongsan.com.vn/ban-nha-rieng-duong-yen-phuc-phuong-van-quan-15/cuc-hiem-ban-phung-hung-ngay-cau-den-30m2-5-tang-gia-chi-hon-7-ty-xiu-pr44686125
+  -> Lấy được 2/6 feature chi tiết.
+
+[DetailSpider] Đang cào (6/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-duong-ngo-thi-nham-phuong-la-khe-khu-do-thi-van-khe/chinh-chu-can-ban-kdt-ha-dong-dien-tich-tu-83-230m-gia-tot-hon-9ty-pr37821352
+  -> Lấy được 4/6 feature chi tiết.
+
+[DetailSpider] Đang cào (7/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-duong-to-huu-phuong-la-khe-khu-do-thi-moi-an-hung/ban-gap-lk-mat-cho-kinh-doanh-sam-uat-24-7-dt-102m-5-tang-dong-tien-cao-lh-pr44195999
+  -> Lấy được 2/6 feature chi tiết.
+
+[DetailSpider] Đang cào (8/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-phuong-la-khe-khu-do-thi-van-khe/gia-tot-nhat-du-an-bt-ha-dong-190m-full-noi-that-xin-huong-mat-33-ty-lh-pr44269921
+  -> Lấy được 3/6 feature chi tiết.
+
+[DetailSpider] Đang cào (9/50): https://batdongsan.com.vn/ban-nha-rieng-pho-xom-phuong-phu-lam-1-15/h-ai-nam-ql21b-sd32m2-xay-5-tang-2-thoang-gia-6-ty-ctl-lh-0978939931-pr45196755
+  -> Lấy được 3/6 feature chi tiết.
+
+[DetailSpider] Đang cào (10/50): https://batdongsan.com.vn/ban-nha-mat-pho-pho-phung-hung-1-phuong-kien-hung-15/ban-vien-103-ha-dong-160m2-7-tang-ham-dong-tien-120tr-th-pr44158552
+  -> Lấy được 4/6 feature chi tiết.
+
+[DetailSpider] Đang cào (11/50): https://batdongsan.com.vn/ban-nha-mat-pho-pho-phung-hung-1-phuong-kien-hung-15/ban-toa-moi-xay-7-tang-dt-155m2-dong-tien-120tr-th-pr44373881
+  -> Lấy được 5/6 feature chi tiết.
+
+[DetailSpider] Đang cào (12/50): https://batdongsan.com.vn/ban-nha-rieng-pho-phu-luong-phuong-phu-luong-3-15/ban-tai-ha-ong-ha-noi-chi-voi-6-ty-36m2-pr45196668
+  -> Lấy được 0/6 feature chi tiết.
+
+[DetailSpider] Đang cào (13/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-phuong-mo-lao-mulberry-lane/ban-chuyen-nhuong-3pn-toa-thap-b-d-huong-dong-nam-co-slot-o-to-pr44700359
+  -> Lấy được 3/6 feature chi tiết.
+
+[DetailSpider] Đang cào (14/50): https://batdongsan.com.vn/ban-nha-rieng-phuong-dong-mai-1/nhanh-tay-khong-het-a-ep-ong-o-to-cach-1om-vao-o-ngay-dt-32m2-5-tang-gia-4-35-ty-pr45196633
+  -> Lấy được 3/6 feature chi tiết.
+
+[DetailSpider] Đang cào (15/50): https://batdongsan.com.vn/ban-nha-rieng-duong-nguyen-khuyen-phuong-van-quan-15/ban-uong-ngay-chung-cu-newskyline-dt-37mx5-tang-cach-1-ra-pho-8ty-pr45196600
+  -> Lấy được 1/6 feature chi tiết.
+
+[DetailSpider] Đang cào (16/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-phuong-kien-hung-khu-do-thi-thanh-ha-muong-thanh/sieu-pham-4-tang-co-ham-chi-co-1-can-duy-nhat-gia-chi-14-ty-pr43487629
+  -> Lấy được 6/6 feature chi tiết.
+
+[DetailSpider] Đang cào (17/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-duong-to-huu-phuong-duong-noi-solasta-mansion-duong-noi/chinh-chu-ban-170m2-day-q2-du-an-masion-nam-cuong-gia-29ty-pr42212670
+  -> Lấy được 3/6 feature chi tiết.
+
+[DetailSpider] Đang cào (18/50): https://batdongsan.com.vn/ban-nha-mat-pho-duong-19-5-1-phuong-van-quan-15/ban-trung-tam-ngay-k-t-gan-cau-trang-ha-ong-can-goc-dt-47m-5-tang-uong-5m-pr45196489
+  -> Lấy được 1/6 feature chi tiết.
+
+[DetailSpider] Đang cào (19/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-duong-thanh-binh-phuong-mo-lao-xuan-mai-riverside/ban-2pn-so-do-chinh-chu-gia-tot-trong-tam-tien-pr45127087
+  -> Lấy được 3/6 feature chi tiết.
+
+[DetailSpider] Đang cào (20/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-duong-quang-trung-phuong-quang-trung-17-flc-star-tower/ban-goc-106m2-3-ngu-2-vs-chi-6-7-ty-pr45014182
+  -> Lấy được 1/6 feature chi tiết.
+
+[DetailSpider] Đang cào (21/50): https://batdongsan.com.vn/ban-nha-rieng-phuong-van-phuc-1/hot-ngay-dong-tien-con-uong-to-lua-chu-can-ban-chuyen-sang-can-biet-thu-pr45196232
+  -> Lấy được 4/6 feature chi tiết.
+
+[DetailSpider] Đang cào (22/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-phuong-duong-noi-an-binh-homeland/quy-ngoai-giao-2-ngu-3-ngu-gia-tot-tai-du-ong-30-ky-h-mb-view-cuc-ep-pr45194841
+  -> Lấy được 1/6 feature chi tiết.
+
+[DetailSpider] Đang cào (23/50): https://batdongsan.com.vn/ban-loai-bat-dong-san-khac-duong-ba-la-phuong-phu-luong-3-pcc1-complex/ban-van-phong-ha-ha-noi-dt-310m2-so-lau-dai-gia-50-trieu-m2-gom-thue-pr43343037
+  -> Lấy được 2/6 feature chi tiết.
+
+[DetailSpider] Đang cào (24/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-duong-quang-trung-phuong-quang-trung-17-binh-vuong-tower/ban-200-115m2-3-ngu-2-vs-chi-5-x-ty-pr44995845
+  -> Lấy được 1/6 feature chi tiết.
+
+[DetailSpider] Đang cào (25/50): https://batdongsan.com.vn/ban-nha-mat-pho-phuong-mo-lao/ban-mp-bam-sat-uong-vu-trong-khanh-dt-45m-x-5-tang-thang-may-uong-5m-kd-tot-pr45196051
+  -> Lấy được 1/6 feature chi tiết.
+
+[DetailSpider] Đang cào (26/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-duong-le-trong-tan-phuong-phu-la-van-phu-victoria/em-ban-ngay-cot-ong-ho-dt-90m2-5-tang-26ty-hon-pr45196036
+  -> Lấy được 2/6 feature chi tiết.
+
+[DetailSpider] Đang cào (27/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-duong-tran-phu-phuong-mo-lao-ellipse-tower-city-view/toi-ban-110-120-m2-3-ngu-2-vs-chi-5-x-ty-pr45099955
+  -> Lấy được 0/6 feature chi tiết.
+
+[DetailSpider] Đang cào (28/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-pho-phung-hung-1-phuong-phuc-la-khu-do-thi-moi-xa-la/226m2-kdt-za-dau-tu-mat-tien-khung-11m-via-he-kinh-doanh-pr44916074
+  -> Lấy được 0/6 feature chi tiết.
+
+[DetailSpider] Đang cào (29/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-duong-thanh-binh-phuong-mo-lao-xuan-mai-riverside/ban-cc-ha-dong-goc-tang-trung-85m-3n2vs-gia-chi-6-5-ty-pr44840636
+  -> Lấy được 2/6 feature chi tiết.
+
+[DetailSpider] Đang cào (30/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-pho-nguyen-thanh-binh-phuong-la-khe-hpc-landmark-105/chinh-chu-em-ban-4pn-toa-105-gia-8-45-ty-lh-0914-664-189-pr45195788
+  -> Lấy được 1/6 feature chi tiết.
+
+[DetailSpider] Đang cào (31/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-duong-to-huu-phuong-la-khe-anland-complex/cuc-hiem-tang-trung-chat-luong-xay-dung-tot-55m-2n1vs-gia-4-95-ty-pr44802938
+  -> Lấy được 2/6 feature chi tiết.
+
+[DetailSpider] Đang cào (32/50): https://batdongsan.com.vn/ban-nha-rieng-duong-nguyen-khuyen-phuong-van-quan-15/ban-mat-kinh-doanh-o-to-o-cua-48m2-x-5-tang-gia-14-2-ty-pr45195622
+  -> Lấy được 2/6 feature chi tiết.
+
+[DetailSpider] Đang cào (33/50): https://batdongsan.com.vn/ban-nha-rieng-pho-van-phuc-phuong-van-phuc-1-15/cc-ban-dt-40m2-hon-9-ty-vi-tri-ep-thang-30m-ra-mt-5m-san-o-cho-thang-may-pr45195820
+  -> Lấy được 0/6 feature chi tiết.
+
+[DetailSpider] Đang cào (34/50): https://batdongsan.com.vn/ban-nha-rieng-duong-be-van-dan-phuong-ha-cau-15/ban-tai-an-6-6-ty-22m2-4pn-4wc-6-tang-phap-ly-ay-u-pr45195558
+  -> Lấy được 6/6 feature chi tiết.
+
+[DetailSpider] Đang cào (35/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-duong-quang-trung-phuong-quang-trung-17-flc-star-tower/ban-cc-2n-2wc-1-lo-gia-tang-full-noi-that-sin-chi-nhinh-5-ty-pr45195546
+  -> Lấy được 2/6 feature chi tiết.
+
+[DetailSpider] Đang cào (36/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-phuong-mo-lao-trung-tam-thuong-mai-tsq/ban-chcc-euroland-125m-3n2vs-full-noi-that-dep-ban-cong-huong-mat-gia-9-ty-pr44407598
+  -> Lấy được 2/6 feature chi tiết.
+
+[DetailSpider] Đang cào (37/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-pho-phung-hung-1-phuong-phuc-la-khu-do-thi-moi-xa-la/kdt-129m2-mt11m-4-tang-5-ngu-noi-that-dep-nhu-hinh-kinh-doanh-tot-o-luon-pr44918377
+  -> Lấy được 5/6 feature chi tiết.
+
+[DetailSpider] Đang cào (38/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-phuong-phu-la-khu-do-thi-moi-van-phu/ban-ha-ong-phan-lo-oto-tranh-via-he-rong-kinh-doanh-tot-dt-88m2-5tang-gia-chi-20-ty-pr45195480
+  -> Lấy được 4/6 feature chi tiết.
+
+[DetailSpider] Đang cào (39/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-duong-to-huu-phuong-van-phuc-1-tieu-khu-do-thi-moi-van-phuc/sieu-o-ha-ong-dt171m2-mt11m-hoan-thien-sieu-ep-gia-re-pr45195369
+  -> Lấy được 5/6 feature chi tiết.
+
+[DetailSpider] Đang cào (40/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-pho-phung-hung-1-phuong-phuc-la-khu-do-thi-moi-xa-la/16-ty-ban-vi-tri-trung-tam-dan-tri-cao-full-noi-that-pr45195271
+  -> Lấy được 4/6 feature chi tiết.
+
+[DetailSpider] Đang cào (41/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-phuong-la-khe-khu-do-thi-van-khe/ban-sieu-pham-lo-goc-3-thoang-phu-xay-moi-75m2-5-tang-vi-tri-kinh-doanh-gia-hon-20ty-pr45195253
+  -> Lấy được 4/6 feature chi tiết.
+
+[DetailSpider] Đang cào (42/50): https://batdongsan.com.vn/ban-nha-mat-pho-duong-ba-la-phuong-phu-lam-1-15/au-gia-man-boi-mt-5m-5-tang-phan-lo-via-he-3-o-to-tranh-vi-tri-xuat-sac-pr45193994
+  -> Lấy được 5/6 feature chi tiết.
+
+[DetailSpider] Đang cào (43/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-duong-ngo-thi-nham-phuong-duong-noi-anland-lakeview/chinh-chu-ban-75m-2n-2w-toa-tang-trung-san-so-full-that-pr45195207
+  -> Lấy được 0/6 feature chi tiết.
+
+[DetailSpider] Đang cào (44/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-phuong-la-khe-the-terra-an-hung/chinh-chu-ban-dualkey-140m-3n-2w-1stu-toa-tang-trung-san-so-full-nt-pr43923905
+  -> Lấy được 3/6 feature chi tiết.
+
+[DetailSpider] Đang cào (45/50): https://batdongsan.com.vn/ban-nha-biet-thu-lien-ke-duong-van-quan-phuong-van-quan-khu-do-thi-moi-van-quan/vip-ha-dong-gan-ho-259-trieu-m-full-noi-that-ngap-tien-ich-dt-230m-pr41726704
+  -> Lấy được 3/6 feature chi tiết.
+
+[DetailSpider] Đang cào (46/50): https://batdongsan.com.vn/ban-nha-mat-pho-phuong-phu-la-khu-do-thi-moi-van-phu/gia-tot-nhat-k-t-dt-55m-x5t-tien-kd-gan-4m-uong-3-oto-tranh-ngay-thpt-ban-mai-17ty-pr45195144
+  -> Lấy được 2/6 feature chi tiết.
+
+[DetailSpider] Đang cào (47/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-duong-quang-trung-phuong-quang-trung-17-binh-vuong-tower/ban-tai-ha-dong-7-ty-vnd-146m2-4n-2w-tang-san-so-pr44882867
+  -> Lấy được 3/6 feature chi tiết.
+
+[DetailSpider] Đang cào (48/50): https://batdongsan.com.vn/ban-nha-rieng-duong-nguyen-khuyen-phuong-van-quan-15/tt-ha-dong-52m-4tang-mat-tien-hiem-5m-chi-8-95-con-thuong-luong-pr45095562
+  -> Lấy được 5/6 feature chi tiết.
+
+[DetailSpider] Đang cào (49/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-phuong-mo-lao-trung-tam-thuong-mai-tsq/chinh-chu-ban-130m-3n-2w-toa-euroland-san-so-full-noi-that-sang-xin-min-pr43549091
+  -> Lấy được 3/6 feature chi tiết.
+
+[DetailSpider] Đang cào (50/50): https://batdongsan.com.vn/ban-can-ho-chung-cu-phuong-la-khe-hpc-landmark-105/chinh-chu-ban-143m-4n-2w-toa-landmark105-to-huu-tang-trung-san-so-full-noi-that-pr44984422
+  -> Lấy được 3/6 feature chi tiết.
+
+[DetailSpider] Hoàn thành. Cập nhật thành công 50/50 bài đăng.
+[Mon 03/02/2026 23:08:50.84] [2/3] Dang huan luyen AI tren du lieu moi... 
+🔄 Đang lấy dữ liệu từ PostgreSQL...
+✅ Đã kết nối thành công tới PostgreSQL.
+✅ Đã tải 5175 bản ghi để huấn luyện.
+🧠 Đang tiền xử lý dữ liệu và làm sạch Features mới...
+🧠 Đang chia tập dữ liệu và thiết lập Cross-Validation...
+⏳ Đang huấn luyện (Học cách dự đoán ĐƠN GIÁ)...
+Fitting 3 folds for each of 72 candidates, totalling 216 fits
+✅ Tham số tối ưu: {'max_depth': 20, 'max_features': 1.0, 'min_samples_leaf': 2, 'min_samples_split': 5, 'n_estimators': 200}
+📊 MAE của Challenger Model (Trên Tổng giá): 1.8166 Tỷ VNĐ
+🥊 Đang so sánh... Champion MAE: 1.7522 vs Challenger MAE: 1.8166
+🛡️ Champion bảo vệ ngôi vương. Giữ nguyên mô hình cũ.
