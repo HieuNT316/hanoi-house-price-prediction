@@ -7,6 +7,7 @@ import re
 import hashlib
 from datetime import datetime
 from sklearn.impute import KNNImputer
+from sqlalchemy import inspect
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from src.database.postgres_manager import PostgresManager
@@ -155,7 +156,7 @@ def process_and_save():
     table_name = 'bds_hadong'
     
     # KIỂM TRA & TỰ ĐỘNG TẠO BẢNG
-    from sqlalchemy import inspect
+    
     inspector = inspect(db.engine)
     if not inspector.has_table(table_name):
         print(f"🏗️ Bảng '{table_name}' chưa tồn tại. Đang tự động build cấu trúc...")
