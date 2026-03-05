@@ -21,7 +21,11 @@ def extract_ward(location_str):
     if pd.isna(location_str): return "Khác"
     parts = location_str.split(',') 
     ward = parts[0].strip() if len(parts) > 1 else location_str.strip()
-    return ward.replace('.', '').strip()
+    ward = re.sub(r'\(.*?\)', '', ward)
+    ward = ward.replace('\n', ' ').replace('\r', ' ').strip()
+    ward = re.sub(r'^[^a-zA-ZÀ-ỹ0-9]+', '', ward, flags=re.UNICODE).strip()
+    ward = re.sub(r'^Phường\s*|^P[.\s]+', '', ward, flags=re.IGNORECASE).strip()
+    return ward
 
 def clean_price(price_str):
     if pd.isna(price_str): return None

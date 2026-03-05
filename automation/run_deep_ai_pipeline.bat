@@ -24,7 +24,7 @@ if %errorlevel% neq 0 (
 
 :: === BƯỚC 2: TRAIN AI MODEL ===
 echo [%date% %time%] [2/3] Dang huan luyen AI tren du lieu moi... >> logs\deep_pipeline.log
-python -m src.ai_engine.train_model >> logs\deep_pipeline.log 2>&1
+python -m src.ai_engine.train_xgb >> logs\deep_pipeline.log 2>&1
 if %errorlevel% neq 0 (
     echo [%date% %time%] LOI: Train model that bai. >> logs\deep_pipeline.log
     goto :error
