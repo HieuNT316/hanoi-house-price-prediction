@@ -44,24 +44,37 @@ def preprocess_features(df):
 
 def train_xgb_model(X, y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    model = XGBRegressor(
+
+    def objective(trial):
+        params = {
+            'objective': 'reg:absoluteerror',
+            'random_state': 42,
+            'n_jobs': -1,
+            'n_estimators': trial.suggest_int('n_estimators', 300, 1500),
+            'learning_rate': trial.suggest_float('learning_rate', 0.005, 0.1, log=True),
+            'max_depth': trial.suggest_int('max_depth', 5, 15),
+            'subsample': trial.suggest_float('subsample', 0.6, 1.0),
+            'colsample_bytree': trial.suggest_float('colsample_bytree', 0.6, 1.0),
+            'min_child_weight': trial.suggest_int('min_child_weight', 1, 10),
+        }
+        model = XGBRegressor(**params)
+        model.fit(X_train, np.log1p(y_train['unit_price']))
+        y_pred_unit = np.expm1(model.predict(X_test))
+        y_pred_total = y_pred_unit * X_test['area']
+        return mean_absolute_error(y_test['price_billion'], y_pred_total)
+    
+    study = optuna.create_study(direction='minimize')
+    study.optimize(objective, n_trials=50, show_progress_bar=True) 
+
+    print(f"✅ Tham số tối ưu nhất từ Optuna: {study.best_params}")
+
+    best_model = XGBRegressor(
         objective='reg:absoluteerror',
         random_state=42,
-        n_jobs=-1 # Tận dụng đa luồng CPU
+        n_jobs=-1,
+        **study.best_params
     )
-
-    param_grid = {
-        'n_estimators': [300, 500, 1000],      # Gợi ý: Quanh mức 300 - 1000
-        'learning_rate': [0.01, 0.05, 0.1],   # Tốc độ học
-        'max_depth': [6, 8, 12],               # Độ sâu của cây
-        'subsample': [0.7, 0.8, 1.0],         # Tỉ lệ lấy mẫu data
-        'colsample_bytree': [0.7, 0.8, 1.0]   # Tỉ lệ lấy mẫu features
-    }
-
-    grid_search = RandomizedSearchCV(estimator=model, param_distributions=param_grid, cv=3, n_jobs=-1, verbose=2, n_iter=20)
-    grid_search.fit(X_train, np.log1p(y_train['unit_price']))
-    best_model = grid_search.best_estimator_
-    print(f"✅ Tham số tối ưu: {grid_search.best_params_}")
+    best_model.fit(X_train, np.log1p(y_train['unit_price']))
 
     y_pred_unit = np.expm1(best_model.predict(X_test))
     y_pred_total = y_pred_unit * X_test['area']
