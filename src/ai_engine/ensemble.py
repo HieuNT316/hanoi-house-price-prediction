@@ -50,7 +50,7 @@ if __name__ == "__main__":
         select price_billion, area, ward, property_type, bedrooms, bathrooms,
                frontage, road_width, direction, floors, legal_status, furniture
         from bds_hadong
-        order by id desc""" 
+        order by listing_id asc""" 
     df = db.load_dataframe(query)
     
     # 2. Xử lý riêng biệt với df.copy() để không dẫm chân lên nhau

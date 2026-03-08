@@ -21,7 +21,7 @@ def load_data_from_db():
         select price_billion, area, ward, property_type, bedrooms, bathrooms,
                frontage, road_width, direction, floors, legal_status, furniture
         from bds_hadong
-        order by id desc"""  # Đảm bảo lấy dữ liệu mới nhất
+        order by listing_id asc"""  # Đảm bảo lấy dữ liệu mới nhất
     return db.load_dataframe(query)
 
 def preprocess_features(df):
