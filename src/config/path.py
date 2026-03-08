@@ -15,6 +15,7 @@ CLEANED_DATA_PATH = os.path.join(DATA_DIR, 'cleaned_data.csv')
 MODEL_PATH = os.path.join(ROOT_DIR, 'models', 'house_price_model.pkl')
 XGB_MODEL_PATH = os.path.join(ROOT_DIR, 'models', 'xgb_house_price_model.pkl')
 CATBOOST_MODEL_PATH = os.path.join(ROOT_DIR, 'models', 'catboost_house_price_model.pkl')
+ENSEMBLE_MODEL_PATH = os.path.join(ROOT_DIR, 'models', 'ensemble_champion.joblib')
 
 # Đảm bảo thư mục lưu trữ luôn tồn tại
 os.makedirs(DATA_DIR, exist_ok=True)

@@ -1,5 +1,6 @@
 # src/ai_engine/predictor.py
 import pandas as pd
+import numpy as np
 import joblib
 import os
 
@@ -56,7 +57,7 @@ class PricePredictor:
                 input_df[expected_col_name] = 1
 
         # 4. Thực hiện dự đoán (ĐƠN GIÁ - Tỷ/m2)
-        pred_unit_price = self.model.predict(input_df)[0]
+        pred_unit_price = np.expm1(self.model.predict(input_df)[0])
         
         # 5. Quy đổi ra TỔNG GIÁ (Tỷ VNĐ)
         pred_total_price = pred_unit_price * area

@@ -12,13 +12,15 @@ from catboost import CatBoostRegressor, Pool
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.config.path import CATBOOST_MODEL_PATH
 from src.database.postgres_manager import PostgresManager
+from src.ai_engine.evaluate import champion_challenger_evaluation
 
 def load_data_from_db():
     db = PostgresManager()
     query = """ 
         select price_billion, area, ward, property_type, bedrooms, bathrooms,
                frontage, road_width, direction, floors, legal_status, furniture
-        from bds_hadong"""
+        from bds_hadong
+        order by id desc"""  # Đảm bảo lấy dữ liệu mới nhất
     return db.load_dataframe(query)
 
 def preprocess_features(df):
@@ -81,7 +83,6 @@ def train_catboost_model(X, y):
     best_model = CatBoostRegressor(
         random_state=42,
         grow_policy='Lossguide',  # Thêm dòng này để cho phép dùng max_leaves
-        loss_function='MAE',
         eval_metric='MAE',
         task_type='GPU', # Nhớ tận dụng GPU Colab nhé
         verbose=100,
@@ -98,38 +99,11 @@ def train_catboost_model(X, y):
 
     return best_model, mae, X.columns
 
-def champion_challenger_evaluation(challenger_model, challenger_mae, feature_columns):
-    os.makedirs(os.path.dirname(CATBOOST_MODEL_PATH), exist_ok=True)
-    
-    if os.path.exists(CATBOOST_MODEL_PATH):
-        try:
-            saved_data = joblib.load(CATBOOST_MODEL_PATH)
-            champion_mae = saved_data.get('mae', float('inf'))
-            
-            print(f"🥊 Đang so sánh... Champion MAE: {champion_mae:.4f} vs Challenger MAE: {challenger_mae:.4f}")
-            
-            if challenger_mae < champion_mae:
-                print("🏆 Challenger chiến thắng! Cập nhật mô hình mới vào hệ thống.")
-                save_model(challenger_model, challenger_mae, feature_columns)
-            else:
-                print("🛡️ Champion bảo vệ ngôi vương. Giữ nguyên mô hình cũ.")
-        except Exception as e:
-            print(f"⚠️ Lỗi đọc model cũ ({e}). Đang ghi đè model mới...")
-            save_model(challenger_model, challenger_mae, feature_columns)
-    else:
-        print("🌟 Chưa có model trong hệ thống. Đang lưu Challenger làm Champion đầu tiên!")
-        save_model(challenger_model, challenger_mae, feature_columns)
-
-def save_model(model, mae, columns):
-    model_data = {'model': model, 'mae': mae, 'features': list(columns)}
-    joblib.dump(model_data, CATBOOST_MODEL_PATH)
-    print(f"💾 Đã lưu tại: {CATBOOST_MODEL_PATH}")
-
 if __name__ == "__main__":
     df = load_data_from_db()
     if len(df) > 50:
         X, y = preprocess_features(df)
         best_model, mae, features = train_catboost_model(X, y)
-        champion_challenger_evaluation(best_model, mae, features)
+        champion_challenger_evaluation(best_model, mae, features, CATBOOST_MODEL_PATH)
     else:
         print("⚠️ Dữ liệu trong DB quá ít để huấn luyện (Yêu cầu > 50 bản ghi).")

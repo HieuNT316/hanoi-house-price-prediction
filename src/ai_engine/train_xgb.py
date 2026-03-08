@@ -13,13 +13,15 @@ from xgboost import XGBRegressor
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.config.path import XGB_MODEL_PATH
 from src.database.postgres_manager import PostgresManager
+from src.ai_engine.evaluate import champion_challenger_evaluation
 
 def load_data_from_db():
     db = PostgresManager()
     query = """ 
         select price_billion, area, ward, property_type, bedrooms, bathrooms,
                frontage, road_width, direction, floors, legal_status, furniture
-        from bds_hadong"""
+        from bds_hadong
+        order by id desc"""  # Đảm bảo lấy dữ liệu mới nhất
     return db.load_dataframe(query)
 
 def preprocess_features(df):
@@ -73,6 +75,8 @@ def train_xgb_model(X, y):
         objective='reg:absoluteerror',
         random_state=42,
         n_jobs=-1,
+        task_type="GPU",
+            devices='0',
         **study.best_params
     )
     best_model.fit(X_train, np.log1p(y_train['unit_price']))
@@ -86,38 +90,11 @@ def train_xgb_model(X, y):
 
     return best_model, mae, X.columns
 
-def champion_challenger_evaluation(challenger_model, challenger_mae, feature_columns):
-    os.makedirs(os.path.dirname(XGB_MODEL_PATH), exist_ok=True)
-    
-    if os.path.exists(XGB_MODEL_PATH):
-        try:
-            saved_data = joblib.load(XGB_MODEL_PATH)
-            champion_mae = saved_data.get('mae', float('inf'))
-            
-            print(f"🥊 Đang so sánh... Champion MAE: {champion_mae:.4f} vs Challenger MAE: {challenger_mae:.4f}")
-            
-            if challenger_mae < champion_mae:
-                print("🏆 Challenger chiến thắng! Cập nhật mô hình mới vào hệ thống.")
-                save_model(challenger_model, challenger_mae, feature_columns)
-            else:
-                print("🛡️ Champion bảo vệ ngôi vương. Giữ nguyên mô hình cũ.")
-        except Exception as e:
-            print(f"⚠️ Lỗi đọc model cũ ({e}). Đang ghi đè model mới...")
-            save_model(challenger_model, challenger_mae, feature_columns)
-    else:
-        print("🌟 Chưa có model trong hệ thống. Đang lưu Challenger làm Champion đầu tiên!")
-        save_model(challenger_model, challenger_mae, feature_columns)
-
-def save_model(model, mae, columns):
-    model_data = {'model': model, 'mae': mae, 'features': list(columns)}
-    joblib.dump(model_data, XGB_MODEL_PATH)
-    print(f"💾 Đã lưu tại: {XGB_MODEL_PATH}")
-
 if __name__ == "__main__":
     df = load_data_from_db()
     if len(df) > 50:
         X, y = preprocess_features(df)
         best_model, mae, features = train_xgb_model(X, y)
-        champion_challenger_evaluation(best_model, mae, features)
+        champion_challenger_evaluation(best_model, mae, features, XGB_MODEL_PATH)
     else:
         print("⚠️ Dữ liệu trong DB quá ít để huấn luyện (Yêu cầu > 50 bản ghi).")
