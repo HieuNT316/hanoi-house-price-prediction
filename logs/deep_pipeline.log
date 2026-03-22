@@ -4939,3 +4939,22 @@ R² của mô hình XGBoost: 0.9228
 🥊 Đang so sánh... Champion MAE: 1.6245 vs Challenger MAE: 1.7532
 🛡️ Champion bảo vệ ngôi vương. Giữ nguyên mô hình cũ.
 [Fri 03/20/2026 22:04:13.11] [4/4] Dang dong bo AI Model (qua LFS) len GitHub... 
+[main e19d4e1] Auto-update AI Model: Fri 03/20/2026 22:04:13.84
+ 1 file changed, 273 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/HieuNT316/hanoi-house-price-prediction.git        
+To https://github.com/Alexus143/hanoi-house-price-prediction.git
+   4159b8d..e19d4e1  main -> main
+========================================= 
+[Sun 03/22/2026 12:38:22.13] [1/4] Dang cao chi tiet BĐS... 
+🔍 Đang cấu hình Database với: postgres.kkwivuufxdewurmxtsto@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres
+
+[DetailSpider] Khởi động luồng làm giàu dữ liệu (Limit: 50 bài/lượt)...
+✅ Đã kết nối thành công tới PostgreSQL.
+[DetailSpider] ✅ Không có listing nào cần làm giàu dữ liệu. Đi ngủ!
+[Sun 03/22/2026 12:39:09.37] [2/4] Dang clean du lieu... 
+🔍 Đang cấu hình Database với: postgres.kkwivuufxdewurmxtsto@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres
+✅ Đã kết nối thành công tới PostgreSQL.
+🔄 Upsert thành công 5416 bản ghi vào 'bds_hadong'.
+✅ Đã cập nhật cột legal_status và furniture thành công.
+[Sun 03/22/2026 12:39:44.75] [3/4] Dang huan luyen AI tren du lieu moi... 
