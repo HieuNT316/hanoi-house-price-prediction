@@ -3499,3 +3499,55 @@ urllib.error.URLError: <urlopen error EOF occurred in violation of protocol (_ss
 [Browser] Lỗi khởi tạo driver: <urlopen error EOF occurred in violation of protocol (_ssl.c:997)>
 [Wed 04/08/2026 16:53:29.27] LOI: Spider that bai. Dung pipeline. 
 [Wed 04/08/2026 16:53:29.32] LUONG FAST BI DUNG DO LOI 
+========================================= 
+[Thu 04/09/2026 12:00:02.75] BAT DAU LUONG FAST (QUET BE MAT) 
+[Thu 04/09/2026 12:00:02.77] [1/3] Dang cao du lieu be mat... 
+[Browser] Đang khởi tạo trình duyệt...
+[Browser] Phát hiện Chrome (Windows): Version 139
+
+[Spider] Đang cào trang 1/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 1.
+
+[Spider] Đang cào trang 2/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p2
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 2.
+
+[Spider] Đang cào trang 3/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p3
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 3.
+
+[Spider] Đang cào trang 4/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p4
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 4.
+
+[Spider] Đang cào trang 5/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p5
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 5.
+
+[Spider] Đang cào trang 6/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p6
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 6.
+
+[Spider] Đang cào trang 7/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p7
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 7.
+
+[Spider] Đang cào trang 8/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p8
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 8.
+
+[Spider] Đang cào trang 9/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p9
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 9.
+
+[Spider] Đang cào trang 10/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p10
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 10.
+[Spider] Đang gộp dữ liệu mới vào file cũ (Khớp theo tên cột)...
+[Spider] Đã lưu 230 dòng mới. Tổng: 36228 dòng.
+[Thu 04/09/2026 12:03:27.09] [2/3] Dang lam sach va day vao PostgreSQL... 
+🔍 Đang cấu hình Database với: postgres.kkwivuufxdewurmxtsto@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres
+D:\Python\realtime_estimate_tracker\src\preprocessing\cleaner.py:138: UserWarning: Parsing dates in %d/%m/%Y format when dayfirst=False (the default) was specified. Pass `dayfirst=True` or specify a format to silence this warning.
+  df['scraped_date'] = pd.to_datetime(df['scraped_date'], errors='coerce')
+Đang đọc dữ liệu thô...
+Tổng số dòng thô: 36228
+🧠 Đang áp dụng NLP trích xuất Đặc trưng...
+🧠 Đang áp dụng KNN Imputer...
+✅ Giữ lại 5667/36228 tin hợp lệ.
+✅ Đã kết nối thành công tới PostgreSQL.
+✅ Bảng 'bds_hadong' đã có PRIMARY KEY. Bỏ qua.
+Đang thực hiện Upsert dữ liệu vào PostgreSQL...
+🔄 Upsert thành công 5667 bản ghi vào 'bds_hadong'.
+✅ Hoàn tất Pipeline ETL.
+[Thu 04/09/2026 12:04:08.85] [3/3] Dang dong bo Data len GitHub... 
