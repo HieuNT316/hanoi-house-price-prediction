@@ -5768,3 +5768,96 @@ See https://aka.ms/gcm/credstores for more information.
 fatal: could not read Username for 'https://github.com': terminal prompts disabled
 [Fri 05/15/2026 13:54:00.23] LOI: git push that bai. 
 [Fri 05/15/2026 13:54:00.25] LUONG FAST BI DUNG DO LOI 
+========================================= 
+[Sat 05/16/2026 12:00:03.35] BAT DAU LUONG FAST (QUET BE MAT) 
+[Sat 05/16/2026 12:00:03.40] [1/3] Dang cao du lieu be mat... 
+[Browser] Đang khởi tạo trình duyệt...
+[Browser] Phát hiện Chrome (Windows): Version 139
+
+[Spider] Đang cào trang 1/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 1.
+
+[Spider] Đang cào trang 2/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p2
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 2.
+
+[Spider] Đang cào trang 3/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p3
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 1). Có thể bị chặn.
+[Spider] 🔄 Đang thử tải lại lần 2/3 cho trang 3...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 2). Có thể bị chặn.
+[Spider] 🔄 Đang thử tải lại lần 3/3 cho trang 3...
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 3.
+
+[Spider] Đang cào trang 4/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p4
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 4.
+
+[Spider] Đang cào trang 5/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p5
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 5.
+
+[Spider] Đang cào trang 6/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p6
+[Spider] Lỗi tại trang 6 (Attempt 1): Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=139.0.7258.139)
+Stacktrace:
+	GetHandleVerifier [0x0xcba8a3+63283]
+	GetHandleVerifier [0x0xcba8e4+63348]
+	(No symbol) [0x0xaf3e43]
+	(No symbol) [0x0xaf156b]
+	(No symbol) [0x0xae4d32]
+	(No symbol) [0x0xae6768]
+	(No symbol) [0x0xae4fc8]
+	(No symbol) [0x0xae4b03]
+	(No symbol) [0x0xae4811]
+	(No symbol) [0x0xae27b4]
+	(No symbol) [0x0xae315b]
+	(No symbol) [0x0xaf785e]
+	(No symbol) [0x0xb832e7]
+	(No symbol) [0x0xb6141c]
+	(No symbol) [0x0xb8271a]
+	(No symbol) [0x0xb61216]
+	(No symbol) [0x0xb30855]
+	(No symbol) [0x0xb316f4]
+	GetHandleVerifier [0x0xf2bb43+2623955]
+	GetHandleVerifier [0x0xf26daa+2604090]
+	GetHandleVerifier [0x0xce069a+218410]
+	GetHandleVerifier [0x0xcd0ed8+154984]
+	GetHandleVerifier [0x0xcd742d+180925]
+	GetHandleVerifier [0x0xcc22b8+94536]
+	GetHandleVerifier [0x0xcc2442+94930]
+	GetHandleVerifier [0x0xcad5ea+9338]
+	BaseThreadInitThunk [0x0x75f4fcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x77a7839e+286]
+	RtlGetAppContainerNamedObjectPath [0x0x77a7836e+238]
+
+[Spider] 🔄 Đang thử tải lại lần 2/3 cho trang 6...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 2). Có thể bị chặn.
+[Spider] 🔄 Đang thử tải lại lần 3/3 cho trang 6...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 3). Có thể bị chặn.
+[Spider] 📸 Đã lưu ảnh debug: D:\Python\realtime_estimate_tracker\src\data_loader\debug_page_6.png
+
+[Spider] Đang cào trang 7/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p7
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 7.
+
+[Spider] Đang cào trang 8/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p8
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 8.
+
+[Spider] Đang cào trang 9/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p9
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 9.
+
+[Spider] Đang cào trang 10/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p10
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 10.
+[Spider] Đang gộp dữ liệu mới vào file cũ (Khớp theo tên cột)...
+[Spider] Đã lưu 252 dòng mới. Tổng: 43940 dòng.
+[Sat 05/16/2026 12:05:26.54] [2/3] Dang lam sach va day vao PostgreSQL... 
+🔍 Đang cấu hình Database với: postgres.kkwivuufxdewurmxtsto@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres
+D:\Python\realtime_estimate_tracker\src\preprocessing\cleaner.py:138: UserWarning: Parsing dates in %d/%m/%Y format when dayfirst=False (the default) was specified. Pass `dayfirst=True` or specify a format to silence this warning.
+  df['scraped_date'] = pd.to_datetime(df['scraped_date'], errors='coerce')
+Đang đọc dữ liệu thô...
+Tổng số dòng thô: 43940
+🧠 Đang áp dụng NLP trích xuất Đặc trưng...
+🧠 Đang áp dụng KNN Imputer...
+✅ Giữ lại 6304/43940 tin hợp lệ.
+✅ Đã kết nối thành công tới PostgreSQL.
+✅ Bảng 'bds_hadong' đã có PRIMARY KEY. Bỏ qua.
+Đang thực hiện Upsert dữ liệu vào PostgreSQL...
+🔄 Upsert thành công 6304 bản ghi vào 'bds_hadong'.
+✅ Hoàn tất Pipeline ETL.
+[Sat 05/16/2026 12:06:16.47] [3/3] Dang dong bo Data len GitHub... 
