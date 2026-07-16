@@ -9474,3 +9474,95 @@ See https://aka.ms/gcm/credstores for more information.
 fatal: could not read Username for 'https://github.com': terminal prompts disabled
 [Wed 07/15/2026 12:05:07.54] LOI: git push that bai. 
 [Wed 07/15/2026 12:05:07.56] LUONG FAST BI DUNG DO LOI 
+========================================= 
+[Thu 07/16/2026 12:00:03.39] BAT DAU LUONG FAST (QUET BE MAT) 
+[Thu 07/16/2026 12:00:03.41] [1/3] Dang cao du lieu be mat... 
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "D:\Python\realtime_estimate_tracker\src\data_loader\spider.py", line 193, in <module>
+    data = run_crawler(pages=10)
+  File "D:\Python\realtime_estimate_tracker\src\data_loader\spider.py", line 109, in run_crawler
+    driver = init_driver()
+  File "D:\Python\realtime_estimate_tracker\src\data_loader\browser.py", line 99, in init_driver
+    raise e
+  File "D:\Python\realtime_estimate_tracker\src\data_loader\browser.py", line 88, in init_driver
+    driver = uc.Chrome(
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\undetected_chromedriver\__init__.py", line 466, in __init__
+    super(Chrome, self).__init__(
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\selenium\webdriver\chrome\webdriver.py", line 45, in __init__
+    super().__init__(
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\selenium\webdriver\chromium\webdriver.py", line 66, in __init__
+    super().__init__(command_executor=executor, options=self.options)
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\selenium\webdriver\common\webdriver.py", line 25, in __init__
+    super().__init__(*args, **kwargs)
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 257, in __init__
+    self.start_session(capabilities)
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\undetected_chromedriver\__init__.py", line 724, in start_session
+    super(selenium.webdriver.chrome.webdriver.WebDriver, self).start_session(
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 352, in start_session
+    response = self.execute(Command.NEW_SESSION, caps)["value"]
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.SessionNotCreatedException: Message: session not created: cannot connect to chrome at 127.0.0.1:50215
+from chrome not reachable; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0xfba8a3+63283]
+	GetHandleVerifier [0x0xfba8e4+63348]
+	(No symbol) [0x0xdf3ca0]
+	(No symbol) [0x0xde7b9a]
+	(No symbol) [0x0xe2ce66]
+	(No symbol) [0x0xe2330f]
+	(No symbol) [0x0xe23146]
+	(No symbol) [0x0xe6ce69]
+	(No symbol) [0x0xe6c77a]
+	(No symbol) [0x0xe61216]
+	(No symbol) [0x0xe30855]
+	(No symbol) [0x0xe316f4]
+	GetHandleVerifier [0x0x122bb43+2623955]
+	GetHandleVerifier [0x0x1226daa+2604090]
+	GetHandleVerifier [0x0xfe069a+218410]
+	GetHandleVerifier [0x0xfd0ed8+154984]
+	GetHandleVerifier [0x0xfd742d+180925]
+	GetHandleVerifier [0x0xfc22b8+94536]
+	GetHandleVerifier [0x0xfc2442+94930]
+	GetHandleVerifier [0x0xfad5ea+9338]
+	BaseThreadInitThunk [0x0x7582fcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x76fb843e+286]
+	RtlGetAppContainerNamedObjectPath [0x0x76fb840e+238]
+
+[Browser] Đang khởi tạo trình duyệt...
+[Browser] Phát hiện Chrome (Windows): Version 139
+[Browser] Lỗi khởi tạo driver: Message: session not created: cannot connect to chrome at 127.0.0.1:50215
+from chrome not reachable; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	GetHandleVerifier [0x0xfba8a3+63283]
+	GetHandleVerifier [0x0xfba8e4+63348]
+	(No symbol) [0x0xdf3ca0]
+	(No symbol) [0x0xde7b9a]
+	(No symbol) [0x0xe2ce66]
+	(No symbol) [0x0xe2330f]
+	(No symbol) [0x0xe23146]
+	(No symbol) [0x0xe6ce69]
+	(No symbol) [0x0xe6c77a]
+	(No symbol) [0x0xe61216]
+	(No symbol) [0x0xe30855]
+	(No symbol) [0x0xe316f4]
+	GetHandleVerifier [0x0x122bb43+2623955]
+	GetHandleVerifier [0x0x1226daa+2604090]
+	GetHandleVerifier [0x0xfe069a+218410]
+	GetHandleVerifier [0x0xfd0ed8+154984]
+	GetHandleVerifier [0x0xfd742d+180925]
+	GetHandleVerifier [0x0xfc22b8+94536]
+	GetHandleVerifier [0x0xfc2442+94930]
+	GetHandleVerifier [0x0xfad5ea+9338]
+	BaseThreadInitThunk [0x0x7582fcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x76fb843e+286]
+	RtlGetAppContainerNamedObjectPath [0x0x76fb840e+238]
+
+[Thu 07/16/2026 12:01:41.26] LOI: Spider that bai. Dung pipeline. 
+[Thu 07/16/2026 12:01:42.62] LUONG FAST BI DUNG DO LOI 
