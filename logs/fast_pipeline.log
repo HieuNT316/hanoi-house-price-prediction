@@ -11300,3 +11300,89 @@ remote:   https://github.com/HieuNT316/hanoi-house-price-prediction.git
 To https://github.com/Alexus143/hanoi-house-price-prediction.git
    7a0960b..c981142  main -> main
 [Thu 08/13/2026 12:05:23.08] HOAN THANH LUONG FAST 
+========================================= 
+[Fri 08/14/2026 12:00:02.98] BAT DAU LUONG FAST (QUET BE MAT) 
+[Fri 08/14/2026 12:00:03.02] [1/3] Dang cao du lieu be mat... 
+[Browser] Đang khởi tạo trình duyệt...
+[Browser] Phát hiện Chrome (Windows): Version 139
+
+[Spider] Đang cào trang 1/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong
+[Spider] Lỗi tại trang 1 (Attempt 1): Message: unknown error: net::ERR_CONNECTION_RESET
+  (Session info: chrome=139.0.7258.139)
+Stacktrace:
+	GetHandleVerifier [0x0xf6a8a3+63283]
+	GetHandleVerifier [0x0xf6a8e4+63348]
+	(No symbol) [0x0xda3e43]
+	(No symbol) [0x0xda156b]
+	(No symbol) [0x0xd94d32]
+	(No symbol) [0x0xd96768]
+	(No symbol) [0x0xd94fc8]
+	(No symbol) [0x0xd94b03]
+	(No symbol) [0x0xd94811]
+	(No symbol) [0x0xd927b4]
+	(No symbol) [0x0xd9315b]
+	(No symbol) [0x0xda785e]
+	(No symbol) [0x0xe332e7]
+	(No symbol) [0x0xe1141c]
+	(No symbol) [0x0xe3271a]
+	(No symbol) [0x0xe11216]
+	(No symbol) [0x0xde0855]
+	(No symbol) [0x0xde16f4]
+	GetHandleVerifier [0x0x11dbb43+2623955]
+	GetHandleVerifier [0x0x11d6daa+2604090]
+	GetHandleVerifier [0x0xf9069a+218410]
+	GetHandleVerifier [0x0xf80ed8+154984]
+	GetHandleVerifier [0x0xf8742d+180925]
+	GetHandleVerifier [0x0xf722b8+94536]
+	GetHandleVerifier [0x0xf72442+94930]
+	GetHandleVerifier [0x0xf5d5ea+9338]
+	BaseThreadInitThunk [0x0x759bfcc9+25]
+	RtlGetAppContainerNamedObjectPath [0x0x77b3843e+286]
+	RtlGetAppContainerNamedObjectPath [0x0x77b3840e+238]
+
+[Spider] 🔄 Đang thử tải lại lần 2/3 cho trang 1...
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 1.
+
+[Spider] Đang cào trang 2/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p2
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 2.
+
+[Spider] Đang cào trang 3/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p3
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 3.
+
+[Spider] Đang cào trang 4/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p4
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 4.
+
+[Spider] Đang cào trang 5/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p5
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 5.
+
+[Spider] Đang cào trang 6/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p6
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 6.
+
+[Spider] Đang cào trang 7/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p7
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 7.
+
+[Spider] Đang cào trang 8/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p8
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 8.
+
+[Spider] Đang cào trang 9/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p9
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 9.
+
+[Spider] Đang cào trang 10/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p10
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 10.
+[Spider] Đang gộp dữ liệu mới vào file cũ (Khớp theo tên cột)...
+[Spider] Đã lưu 257 dòng mới. Tổng: 66460 dòng.
+[Fri 08/14/2026 12:04:43.32] [2/3] Dang lam sach va day vao PostgreSQL... 
+🔍 Đang cấu hình Database với: postgres.kkwivuufxdewurmxtsto@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres
+D:\Python\realtime_estimate_tracker\src\preprocessing\cleaner.py:138: UserWarning: Parsing dates in %d/%m/%Y format when dayfirst=False (the default) was specified. Pass `dayfirst=True` or specify a format to silence this warning.
+  df['scraped_date'] = pd.to_datetime(df['scraped_date'], errors='coerce')
+Đang đọc dữ liệu thô...
+Tổng số dòng thô: 66460
+🧠 Đang áp dụng NLP trích xuất Đặc trưng...
+🧠 Đang áp dụng KNN Imputer...
+✅ Giữ lại 8291/66460 tin hợp lệ.
+✅ Đã kết nối thành công tới PostgreSQL.
+✅ Bảng 'bds_hadong' đã có PRIMARY KEY. Bỏ qua.
+Đang thực hiện Upsert dữ liệu vào PostgreSQL...
+🔄 Upsert thành công 8291 bản ghi vào 'bds_hadong'.
+✅ Hoàn tất Pipeline ETL.
+[Fri 08/14/2026 12:05:34.60] [3/3] Dang dong bo Data len GitHub... 
