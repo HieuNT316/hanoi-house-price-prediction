@@ -12315,3 +12315,288 @@ remote:   https://github.com/HieuNT316/hanoi-house-price-prediction.git
 To https://github.com/Alexus143/hanoi-house-price-prediction.git
    73280e8..c902598  main -> main
 [Sat 08/29/2026 12:05:46.42] HOAN THANH LUONG FAST 
+========================================= 
+[Sun 08/30/2026 12:00:02.39] BAT DAU LUONG FAST (QUET BE MAT) 
+[Sun 08/30/2026 12:00:02.41] [1/3] Dang cao du lieu be mat... 
+[Browser] Đang khởi tạo trình duyệt...
+[Browser] Phát hiện Chrome (Windows): Version 151
+
+[Spider] Đang cào trang 1/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 1.
+
+[Spider] Đang cào trang 2/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p2
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 2.
+
+[Spider] Đang cào trang 3/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p3
+[Spider] ✅ Thành công: Tìm thấy 40 tin đăng ở trang 3.
+
+[Spider] Đang cào trang 4/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p4
+[Spider] ✅ Thành công: Tìm thấy 30 tin đăng ở trang 4.
+
+[Spider] Đang cào trang 5/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p5
+[Spider] Lỗi tại trang 5 (Attempt 1): Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=151.0.7922.175)
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0xa73353+fd93]
+	undetected_chromedriver!GetHandleVerifier [0xa73394+fdd4]
+	undetected_chromedriver!(No symbol) [0x869220]
+	undetected_chromedriver!(No symbol) [0x8667b2]
+	undetected_chromedriver!(No symbol) [0x859b24]
+	undetected_chromedriver!(No symbol) [0x85b520]
+	undetected_chromedriver!(No symbol) [0x859faf]
+	undetected_chromedriver!(No symbol) [0x8598f5]
+	undetected_chromedriver!(No symbol) [0x8595f5]
+	undetected_chromedriver!(No symbol) [0x8577c8]
+	undetected_chromedriver!(No symbol) [0x857eda]
+	undetected_chromedriver!(No symbol) [0x86ccae]
+	undetected_chromedriver!(No symbol) [0x8f3f14]
+	undetected_chromedriver!(No symbol) [0x8d587c]
+	undetected_chromedriver!(No symbol) [0x8f34d9]
+	undetected_chromedriver!(No symbol) [0x8d5616]
+	undetected_chromedriver!(No symbol) [0x8a87e9]
+	undetected_chromedriver!(No symbol) [0x8a95b4]
+	undetected_chromedriver!GetHandleVerifier [0xd0f51a+2abf5a]
+	undetected_chromedriver!GetHandleVerifier [0xd0aa21+2a7461]
+	undetected_chromedriver!GetHandleVerifier [0xa9f374+3bdb4]
+	undetected_chromedriver!GetHandleVerifier [0xa8e036+2aa76]
+	undetected_chromedriver!GetHandleVerifier [0xa94efd+3193d]
+	undetected_chromedriver!GetHandleVerifier [0xa7c8a8+192e8]
+	undetected_chromedriver!GetHandleVerifier [0xa7ca55+19495]
+	undetected_chromedriver!GetHandleVerifier [0xa653ff+1e3f]
+	KERNEL32!BaseThreadInitThunk [0x75ccfcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77b6843e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77b6840e+ee]
+
+[Spider] 🔄 Đang thử tải lại lần 2/3 cho trang 5...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 2). Có thể bị chặn.
+[Spider] 🔄 Đang thử tải lại lần 3/3 cho trang 5...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 3). Có thể bị chặn.
+[Spider] 📸 Đã lưu ảnh debug: D:\Python\realtime_estimate_tracker\src\data_loader\debug_page_5.png
+
+[Spider] Đang cào trang 6/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p6
+[Spider] Lỗi tại trang 6 (Attempt 1): Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=151.0.7922.175)
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0xa73353+fd93]
+	undetected_chromedriver!GetHandleVerifier [0xa73394+fdd4]
+	undetected_chromedriver!(No symbol) [0x869220]
+	undetected_chromedriver!(No symbol) [0x8667b2]
+	undetected_chromedriver!(No symbol) [0x859b24]
+	undetected_chromedriver!(No symbol) [0x85b520]
+	undetected_chromedriver!(No symbol) [0x859faf]
+	undetected_chromedriver!(No symbol) [0x8598f5]
+	undetected_chromedriver!(No symbol) [0x8595f5]
+	undetected_chromedriver!(No symbol) [0x8577c8]
+	undetected_chromedriver!(No symbol) [0x857eda]
+	undetected_chromedriver!(No symbol) [0x86ccae]
+	undetected_chromedriver!(No symbol) [0x8f3f14]
+	undetected_chromedriver!(No symbol) [0x8d587c]
+	undetected_chromedriver!(No symbol) [0x8f34d9]
+	undetected_chromedriver!(No symbol) [0x8d5616]
+	undetected_chromedriver!(No symbol) [0x8a87e9]
+	undetected_chromedriver!(No symbol) [0x8a95b4]
+	undetected_chromedriver!GetHandleVerifier [0xd0f51a+2abf5a]
+	undetected_chromedriver!GetHandleVerifier [0xd0aa21+2a7461]
+	undetected_chromedriver!GetHandleVerifier [0xa9f374+3bdb4]
+	undetected_chromedriver!GetHandleVerifier [0xa8e036+2aa76]
+	undetected_chromedriver!GetHandleVerifier [0xa94efd+3193d]
+	undetected_chromedriver!GetHandleVerifier [0xa7c8a8+192e8]
+	undetected_chromedriver!GetHandleVerifier [0xa7ca55+19495]
+	undetected_chromedriver!GetHandleVerifier [0xa653ff+1e3f]
+	KERNEL32!BaseThreadInitThunk [0x75ccfcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77b6843e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77b6840e+ee]
+
+[Spider] 🔄 Đang thử tải lại lần 2/3 cho trang 6...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 2). Có thể bị chặn.
+[Spider] 🔄 Đang thử tải lại lần 3/3 cho trang 6...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 3). Có thể bị chặn.
+[Spider] 📸 Đã lưu ảnh debug: D:\Python\realtime_estimate_tracker\src\data_loader\debug_page_6.png
+
+[Spider] Đang cào trang 7/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p7
+[Spider] Lỗi tại trang 7 (Attempt 1): Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=151.0.7922.175)
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0xa73353+fd93]
+	undetected_chromedriver!GetHandleVerifier [0xa73394+fdd4]
+	undetected_chromedriver!(No symbol) [0x869220]
+	undetected_chromedriver!(No symbol) [0x8667b2]
+	undetected_chromedriver!(No symbol) [0x859b24]
+	undetected_chromedriver!(No symbol) [0x85b520]
+	undetected_chromedriver!(No symbol) [0x859faf]
+	undetected_chromedriver!(No symbol) [0x8598f5]
+	undetected_chromedriver!(No symbol) [0x8595f5]
+	undetected_chromedriver!(No symbol) [0x8577c8]
+	undetected_chromedriver!(No symbol) [0x857eda]
+	undetected_chromedriver!(No symbol) [0x86ccae]
+	undetected_chromedriver!(No symbol) [0x8f3f14]
+	undetected_chromedriver!(No symbol) [0x8d587c]
+	undetected_chromedriver!(No symbol) [0x8f34d9]
+	undetected_chromedriver!(No symbol) [0x8d5616]
+	undetected_chromedriver!(No symbol) [0x8a87e9]
+	undetected_chromedriver!(No symbol) [0x8a95b4]
+	undetected_chromedriver!GetHandleVerifier [0xd0f51a+2abf5a]
+	undetected_chromedriver!GetHandleVerifier [0xd0aa21+2a7461]
+	undetected_chromedriver!GetHandleVerifier [0xa9f374+3bdb4]
+	undetected_chromedriver!GetHandleVerifier [0xa8e036+2aa76]
+	undetected_chromedriver!GetHandleVerifier [0xa94efd+3193d]
+	undetected_chromedriver!GetHandleVerifier [0xa7c8a8+192e8]
+	undetected_chromedriver!GetHandleVerifier [0xa7ca55+19495]
+	undetected_chromedriver!GetHandleVerifier [0xa653ff+1e3f]
+	KERNEL32!BaseThreadInitThunk [0x75ccfcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77b6843e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77b6840e+ee]
+
+[Spider] 🔄 Đang thử tải lại lần 2/3 cho trang 7...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 2). Có thể bị chặn.
+[Spider] 🔄 Đang thử tải lại lần 3/3 cho trang 7...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 3). Có thể bị chặn.
+[Spider] 📸 Đã lưu ảnh debug: D:\Python\realtime_estimate_tracker\src\data_loader\debug_page_7.png
+
+[Spider] Đang cào trang 8/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p8
+[Spider] Lỗi tại trang 8 (Attempt 1): Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=151.0.7922.175)
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0xa73353+fd93]
+	undetected_chromedriver!GetHandleVerifier [0xa73394+fdd4]
+	undetected_chromedriver!(No symbol) [0x869220]
+	undetected_chromedriver!(No symbol) [0x8667b2]
+	undetected_chromedriver!(No symbol) [0x859b24]
+	undetected_chromedriver!(No symbol) [0x85b520]
+	undetected_chromedriver!(No symbol) [0x859faf]
+	undetected_chromedriver!(No symbol) [0x8598f5]
+	undetected_chromedriver!(No symbol) [0x8595f5]
+	undetected_chromedriver!(No symbol) [0x8577c8]
+	undetected_chromedriver!(No symbol) [0x857eda]
+	undetected_chromedriver!(No symbol) [0x86ccae]
+	undetected_chromedriver!(No symbol) [0x8f3f14]
+	undetected_chromedriver!(No symbol) [0x8d587c]
+	undetected_chromedriver!(No symbol) [0x8f34d9]
+	undetected_chromedriver!(No symbol) [0x8d5616]
+	undetected_chromedriver!(No symbol) [0x8a87e9]
+	undetected_chromedriver!(No symbol) [0x8a95b4]
+	undetected_chromedriver!GetHandleVerifier [0xd0f51a+2abf5a]
+	undetected_chromedriver!GetHandleVerifier [0xd0aa21+2a7461]
+	undetected_chromedriver!GetHandleVerifier [0xa9f374+3bdb4]
+	undetected_chromedriver!GetHandleVerifier [0xa8e036+2aa76]
+	undetected_chromedriver!GetHandleVerifier [0xa94efd+3193d]
+	undetected_chromedriver!GetHandleVerifier [0xa7c8a8+192e8]
+	undetected_chromedriver!GetHandleVerifier [0xa7ca55+19495]
+	undetected_chromedriver!GetHandleVerifier [0xa653ff+1e3f]
+	KERNEL32!BaseThreadInitThunk [0x75ccfcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77b6843e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77b6840e+ee]
+
+[Spider] 🔄 Đang thử tải lại lần 2/3 cho trang 8...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 2). Có thể bị chặn.
+[Spider] 🔄 Đang thử tải lại lần 3/3 cho trang 8...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 3). Có thể bị chặn.
+[Spider] 📸 Đã lưu ảnh debug: D:\Python\realtime_estimate_tracker\src\data_loader\debug_page_8.png
+
+[Spider] Đang cào trang 9/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p9
+[Spider] Lỗi tại trang 9 (Attempt 1): Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=151.0.7922.175)
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0xa73353+fd93]
+	undetected_chromedriver!GetHandleVerifier [0xa73394+fdd4]
+	undetected_chromedriver!(No symbol) [0x869220]
+	undetected_chromedriver!(No symbol) [0x8667b2]
+	undetected_chromedriver!(No symbol) [0x859b24]
+	undetected_chromedriver!(No symbol) [0x85b520]
+	undetected_chromedriver!(No symbol) [0x859faf]
+	undetected_chromedriver!(No symbol) [0x8598f5]
+	undetected_chromedriver!(No symbol) [0x8595f5]
+	undetected_chromedriver!(No symbol) [0x8577c8]
+	undetected_chromedriver!(No symbol) [0x857eda]
+	undetected_chromedriver!(No symbol) [0x86ccae]
+	undetected_chromedriver!(No symbol) [0x8f3f14]
+	undetected_chromedriver!(No symbol) [0x8d587c]
+	undetected_chromedriver!(No symbol) [0x8f34d9]
+	undetected_chromedriver!(No symbol) [0x8d5616]
+	undetected_chromedriver!(No symbol) [0x8a87e9]
+	undetected_chromedriver!(No symbol) [0x8a95b4]
+	undetected_chromedriver!GetHandleVerifier [0xd0f51a+2abf5a]
+	undetected_chromedriver!GetHandleVerifier [0xd0aa21+2a7461]
+	undetected_chromedriver!GetHandleVerifier [0xa9f374+3bdb4]
+	undetected_chromedriver!GetHandleVerifier [0xa8e036+2aa76]
+	undetected_chromedriver!GetHandleVerifier [0xa94efd+3193d]
+	undetected_chromedriver!GetHandleVerifier [0xa7c8a8+192e8]
+	undetected_chromedriver!GetHandleVerifier [0xa7ca55+19495]
+	undetected_chromedriver!GetHandleVerifier [0xa653ff+1e3f]
+	KERNEL32!BaseThreadInitThunk [0x75ccfcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77b6843e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77b6840e+ee]
+
+[Spider] 🔄 Đang thử tải lại lần 2/3 cho trang 9...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 2). Có thể bị chặn.
+[Spider] 🔄 Đang thử tải lại lần 3/3 cho trang 9...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 3). Có thể bị chặn.
+[Spider] 📸 Đã lưu ảnh debug: D:\Python\realtime_estimate_tracker\src\data_loader\debug_page_9.png
+
+[Spider] Đang cào trang 10/10: https://batdongsan.com.vn/nha-dat-ban-ha-dong/p10
+[Spider] Lỗi tại trang 10 (Attempt 1): Message: unknown error: net::ERR_NAME_NOT_RESOLVED
+  (Session info: chrome=151.0.7922.175)
+Stacktrace:
+	undetected_chromedriver!GetHandleVerifier [0xa73353+fd93]
+	undetected_chromedriver!GetHandleVerifier [0xa73394+fdd4]
+	undetected_chromedriver!(No symbol) [0x869220]
+	undetected_chromedriver!(No symbol) [0x8667b2]
+	undetected_chromedriver!(No symbol) [0x859b24]
+	undetected_chromedriver!(No symbol) [0x85b520]
+	undetected_chromedriver!(No symbol) [0x859faf]
+	undetected_chromedriver!(No symbol) [0x8598f5]
+	undetected_chromedriver!(No symbol) [0x8595f5]
+	undetected_chromedriver!(No symbol) [0x8577c8]
+	undetected_chromedriver!(No symbol) [0x857eda]
+	undetected_chromedriver!(No symbol) [0x86ccae]
+	undetected_chromedriver!(No symbol) [0x8f3f14]
+	undetected_chromedriver!(No symbol) [0x8d587c]
+	undetected_chromedriver!(No symbol) [0x8f34d9]
+	undetected_chromedriver!(No symbol) [0x8d5616]
+	undetected_chromedriver!(No symbol) [0x8a87e9]
+	undetected_chromedriver!(No symbol) [0x8a95b4]
+	undetected_chromedriver!GetHandleVerifier [0xd0f51a+2abf5a]
+	undetected_chromedriver!GetHandleVerifier [0xd0aa21+2a7461]
+	undetected_chromedriver!GetHandleVerifier [0xa9f374+3bdb4]
+	undetected_chromedriver!GetHandleVerifier [0xa8e036+2aa76]
+	undetected_chromedriver!GetHandleVerifier [0xa94efd+3193d]
+	undetected_chromedriver!GetHandleVerifier [0xa7c8a8+192e8]
+	undetected_chromedriver!GetHandleVerifier [0xa7ca55+19495]
+	undetected_chromedriver!GetHandleVerifier [0xa653ff+1e3f]
+	KERNEL32!BaseThreadInitThunk [0x75ccfcc9+19]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77b6843e+11e]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x77b6840e+ee]
+
+[Spider] 🔄 Đang thử tải lại lần 2/3 cho trang 10...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 2). Có thể bị chặn.
+[Spider] 🔄 Đang thử tải lại lần 3/3 cho trang 10...
+[Spider] ⚠️ Không tìm thấy dữ liệu (Attempt 3). Có thể bị chặn.
+[Spider] 📸 Đã lưu ảnh debug: D:\Python\realtime_estimate_tracker\src\data_loader\debug_page_10.png
+[Spider] Đang gộp dữ liệu mới vào file cũ (Khớp theo tên cột)...
+[Spider] Đã lưu 107 dòng mới. Tổng: 70356 dòng.
+[Sun 08/30/2026 12:05:09.95] [2/3] Dang lam sach va day vao PostgreSQL... 
+🔍 Đang cấu hình Database với: postgres.kkwivuufxdewurmxtsto@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres
+D:\Python\realtime_estimate_tracker\src\preprocessing\cleaner.py:138: UserWarning: Parsing dates in %d/%m/%Y format when dayfirst=False (the default) was specified. Pass `dayfirst=True` or specify a format to silence this warning.
+  df['scraped_date'] = pd.to_datetime(df['scraped_date'], errors='coerce')
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "D:\Python\realtime_estimate_tracker\src\preprocessing\cleaner.py", line 223, in <module>
+    process_and_save()
+  File "D:\Python\realtime_estimate_tracker\src\preprocessing\cleaner.py", line 198, in process_and_save
+    inspector = inspect(db.engine)
+  File "D:\Python\realtime_estimate_tracker\venv_bds\lib\site-packages\sqlalchemy\inspection.py", line 147, in inspect
+    raise exc.NoInspectionAvailable(
+sqlalchemy.exc.NoInspectionAvailable: No inspection system is available for object of type <class 'NoneType'>
+Đang đọc dữ liệu thô...
+Tổng số dòng thô: 70356
+🧠 Đang áp dụng NLP trích xuất Đặc trưng...
+🧠 Đang áp dụng KNN Imputer...
+✅ Giữ lại 8749/70356 tin hợp lệ.
+❌ Lỗi kết nối Database: (psycopg2.OperationalError) could not translate host name "aws-1-ap-southeast-1.pooler.supabase.com" to address: Name or service not known
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+[Sun 08/30/2026 12:05:57.28] LOI: Cleaner that bai. Dung pipeline. 
+[Sun 08/30/2026 12:05:59.41] LUONG FAST BI DUNG DO LOI 
