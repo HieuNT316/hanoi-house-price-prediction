@@ -70963,3 +70963,28 @@ remote: This repository moved. Please use the new location:
 remote:   https://github.com/HieuNT316/hanoi-house-price-prediction.git        
 To https://github.com/Alexus143/hanoi-house-price-prediction.git
    b9f2415..7b5be79  main -> main
+========================================= 
+[Thu 10/01/2026 22:00:02.27] [1/4] Dang cao chi tiet BĐS... 
+🔍 Đang cấu hình Database với: postgres.kkwivuufxdewurmxtsto@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres
+
+[DetailSpider] Khởi động luồng làm giàu dữ liệu (Limit: 50 bài/lượt)...
+❌ Lỗi kết nối Database: (psycopg2.OperationalError) connection to server at "aws-1-ap-southeast-1.pooler.supabase.com" (3.1.167.181), port 5432 failed: FATAL:  (EAUTHQUERY) auth_query secret check timed out
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+[DetailSpider] ❌ Lỗi kết nối DB. Dừng luồng cào chi tiết.
+[Thu 10/01/2026 22:00:34.00] [2/4] Dang clean du lieu... 
+🔍 Đang cấu hình Database với: postgres.kkwivuufxdewurmxtsto@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "D:\Python\realtime_estimate_tracker\src\preprocessing\clean_phase2.py", line 66, in <module>
+    df = db.load_dataframe("SELECT * FROM bds_hadong")
+  File "D:\Python\realtime_estimate_tracker\src\database\postgres_manager.py", line 49, in load_dataframe
+    raise ConnectionError("Không có kết nối DB.")
+ConnectionError: Không có kết nối DB.
+❌ Lỗi kết nối Database: (psycopg2.OperationalError) connection to server at "aws-1-ap-southeast-1.pooler.supabase.com" (3.1.167.181), port 5432 failed: FATAL:  (EAUTHQUERY) auth_query secret check timed out
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+[Thu 10/01/2026 22:00:37.67] LOI: clean data phase 2 that bai. Dung pipeline. 
