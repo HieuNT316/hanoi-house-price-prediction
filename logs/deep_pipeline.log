@@ -71013,3 +71013,28 @@ ConnectionError: Không có kết nối DB.
 
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
 [Fri 10/02/2026 22:00:47.22] LOI: clean data phase 2 that bai. Dung pipeline. 
+========================================= 
+[Sat 10/03/2026 22:00:03.06] [1/4] Dang cao chi tiet BĐS... 
+🔍 Đang cấu hình Database với: postgres.kkwivuufxdewurmxtsto@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres
+
+[DetailSpider] Khởi động luồng làm giàu dữ liệu (Limit: 50 bài/lượt)...
+❌ Lỗi kết nối Database: (psycopg2.OperationalError) connection to server at "aws-1-ap-southeast-1.pooler.supabase.com" (13.213.241.248), port 5432 failed: FATAL:  (EAUTHQUERY) authentication query failed: connection to database not available
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+[DetailSpider] ❌ Lỗi kết nối DB. Dừng luồng cào chi tiết.
+[Sat 10/03/2026 22:00:52.32] [2/4] Dang clean du lieu... 
+🔍 Đang cấu hình Database với: postgres.kkwivuufxdewurmxtsto@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres
+Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\User\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "D:\Python\realtime_estimate_tracker\src\preprocessing\clean_phase2.py", line 66, in <module>
+    df = db.load_dataframe("SELECT * FROM bds_hadong")
+  File "D:\Python\realtime_estimate_tracker\src\database\postgres_manager.py", line 49, in load_dataframe
+    raise ConnectionError("Không có kết nối DB.")
+ConnectionError: Không có kết nối DB.
+❌ Lỗi kết nối Database: (psycopg2.OperationalError) connection to server at "aws-1-ap-southeast-1.pooler.supabase.com" (13.213.241.248), port 5432 failed: FATAL:  (EAUTHQUERY) authentication query failed: connection to database not available
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+[Sat 10/03/2026 22:01:05.46] LOI: clean data phase 2 that bai. Dung pipeline. 
